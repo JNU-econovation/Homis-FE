@@ -7,7 +7,6 @@ body {
     color: #4a4a4a;
 }
 
-/* 전체 화면 */
 .layout {
     display: flex;
     justify-content: center;
@@ -15,7 +14,6 @@ body {
     min-height: 100vh;
 }
 
-/* 모든 컴포넌트 담을 컨테이너 공간 */
 .container {
     width: 100%;
     max-width: 920px;
@@ -25,6 +23,7 @@ body {
     position: relative;
     box-shadow: 0 20px 40px rgba(100, 90, 85, 0.1);
     overflow: hidden;
+    background-color: white;
 }
 
 @media (min-width: 768px) {
@@ -34,24 +33,20 @@ body {
     }
 }
 
-/* 헤더 */
 .layout-header {
     height: 60px;
     display: flex;
     align-items: center;
     padding: 0 20px;
     background-color: #fff;
-    border-bottom: 1px solid #eee; /* 경계선 */
+    border-bottom: 1px solid #eee;
     z-index: 10;
     flex-shrink: 0;
 }
 
-/* arrow button(header) */
 .header-back-btn {
-    /* removing button box */
     background: none;
     border: none;
-    /* removing button box */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -61,24 +56,21 @@ body {
 }
 .header-back-btn:hover { color: #a89085; }
 
-/* 메인 컨텐츠 담을 곳(footer 제외한) */
 .layout-mainContent {
     flex: 1;
     padding: 40px 100px; /* (vertical) (horizontal) */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center; /* positiong vertically. <-> justify-items */
+    align-items: center; /* positioning vertically. <-> justify-items */
 }
 
 .layout-footer {
     text-align: center;
     font-size: 12.5px;
     color: #869287;
-    margin-top: 40px; /* 위쪽 여백 40px 확보 -> 위에 있는 요소와 40px 간격 추가 */
-    margin-bottom: 30px; /* 아래쪽 여백 확보 */
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 
-/* 메인 컨텐츠 담을 곳(mainContent) 중에서 로고, 닉네임 등 표현할 곳 */
 .content-inner { width: 100%; max-width: 500px; }
-

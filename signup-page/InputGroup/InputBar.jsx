@@ -1,28 +1,31 @@
 import './InputBar.css';
 
-export default function InputBar( { label, placeholder, type = 'text', value, onChange, name, buttonText, onButtonClick } ) {
+export default function InputBar( { label, placeholder, type = 'text', value, onChange, name, errorMessage/* onButtonClick buttonText*/ } ) {
     return (
         <div className='input-bar'>
             <label className='input-label'>{label}</label>
             <div className='input-wrapper'>
                 <input
-                    className='custom-input'
+                    className={`custom-input ${errorMessage ? 'error' : ''}`}
                     type={type}
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
                     name={name}
-                    style={buttonText ? { paddingRight: '90px' } : { }} // buttonText(중복 확인) 넘어오면 오른쪽 패딩...
+                    /*style={buttonText ? { paddingRight: '90px' } : { }}*/
                 />
                 {/* using short circuit rule */}
                 {/* buttonText false -> doing nothing */}
+                {/*
                 {buttonText && (
                     <button className='check-btn' onClick={onButtonClick} type='button'>
                         {buttonText}
-                    </button>)
-                }
+                    </button>)}
+                */}
             </div>
+            {errorMessage && (
+                    <p className='error-message'>{errorMessage}</p>
+                )}
         </div>
     );
 }
-

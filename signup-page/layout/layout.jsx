@@ -29,7 +29,7 @@ function Layout( { children, onBack } ) {
                 </div>
             </main>
             <footer className='layout-footer'>
-                &copy; 2025 Knitting-Joa. All rights reserved.
+                &copy; 2025 Knitting-Doa. All rights reserved.
             </footer>
             </div>
         </div>

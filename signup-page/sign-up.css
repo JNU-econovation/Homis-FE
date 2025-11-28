@@ -1,7 +1,6 @@
-/* page-title => '뜨개 도아 가입하기' */
 .page-title-area {
     text-align: center;
-    margin-bottom: 40px; /* 아래 요소(Input Bar)와 title 사이의 간격 */
+    margin-bottom: 40px;
 }
 .page-title {
     font-size: 40px;
@@ -26,7 +25,7 @@
     border-radius: 16px;
     font-size: 17px;
     font-weight: 700;
-    cursor: pointer; /* 마우스 커서 올리면 커서가 손 모양으로 변경됨 */
+    cursor: pointer;
     box-shadow: 0 10px 20px rgba(141, 123, 123, 0.3);
     transition: 0.3s;
 }
