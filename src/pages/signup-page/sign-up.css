@@ -1,0 +1,53 @@
+.page-sub-title {
+    position: absolute;
+
+    left: 477px;
+    top: 195px;
+
+    font-family: 'Pretendard';
+    font-weight: 600; /* weight 600 -> SemiBold */
+    font-size: 16px;
+
+    line-height: 1em; /* 100% <=> 1em | 24% <=> 0.24em */
+    letter-spacing: 0.24em; 
+    text-align: center;
+
+    color: #938181;
+}
+
+.page-title {
+    position: absolute;
+
+    left: 509px;
+    top: 227px;
+
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 24px;
+    
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    text-align: center;
+
+    color: #000000;
+}
+
+.submit-btn-container {
+    position: absolute;
+
+    top: 751px;
+    left: 24px;
+}
+
+.submit-btn {
+    width: 1146px;
+    height: 50px;
+
+    border-radius: 21px;
+
+    font-family: 'Pretendard';
+    color: #FEFEFE;
+
+    background-color: #938181;
+    border: 0px solid #938181;
+}
