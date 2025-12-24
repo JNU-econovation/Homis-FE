@@ -1,8 +1,0 @@
-.layout-mainContent {
-    padding-top: 195px;
-}
-
-.input { /* input-bar 전체 */
-    margin-top: 198px; /* sub-title의 시작(195px)을 기준으로 적용되는 margin.  393px까지*/
-    margin-left: 176px; /* label left padding: 176 */
-}

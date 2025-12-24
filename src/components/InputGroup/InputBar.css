@@ -1,37 +1,31 @@
-.input-bar-container {
-    position: relative;
-}
+.input-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-.input-label {
-    position: absolute;
+    width: 70vw;
 
-    left: 0px;
-    top: 13px;
-
-    width: 60px;
-    height: 16px;
-
-    font-family: 'Pretendard';
-    font-size: 16px;
-    font-weight: 500;
-
-    line-height: 1em;
-    letter-spacing: -0.01em;
-
-    color: #595959;
-}
-
-.input-wrapper {
-    margin-left: 73px; /* label left: 176px | input-bar left: 249px */
+    margin-bottom: 1vh;
 }
 
 .custom-input {
-    width: 727px;
-    height: 42px;
-    
+    width: 63vw;
+    height: 4.5vh;
+
     border-radius: 5px;
     border: 1.5px solid #B4B4B4;
 
-    margin-bottom: 8px;
     padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.input-label {
+    flex: 0 0 85px;
+    
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    color: #595959;
 }
