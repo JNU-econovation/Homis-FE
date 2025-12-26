@@ -53,3 +53,29 @@ export async function validateSubmit(inputs, errors) {
 
     return await signUpAPI(payload);
 }
+
+// event handler for all inputs in InputBar component
+export function handleChange(e, inputs, setInputs, setErrors=null) {
+    const { name, value } = e.target;
+    const nextInputs = { ...inputs, [name]: value };
+    setInputs(nextInputs);
+
+    if (setErrors != null) {
+        const errorValidation = validateInputs(nextInputs);
+        setErrors(errorValidation);
+    }
+}
+
+export async function validateLogIn(inputs) {
+    if (!inputs.id || !inputs.pw) {
+        alert('아이디와 비밀번호 모두 입력해 주세요')
+        return false;
+    }
+
+    const payload = {
+        userName: inputs.id,
+        userPassword: inputs.pw,
+    };
+
+    return await LogInAPI(payload);
+}

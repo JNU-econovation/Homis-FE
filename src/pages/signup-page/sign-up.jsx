@@ -2,21 +2,11 @@ import { useState } from 'react';
 import Layout from './layout/layout.jsx';
 import InputBar from '../../components/InputGroup/InputBar.jsx';
 import './sign-up.css';
-import { validateInputs, validateSubmit } from '../../utils/validators.jsx';
+import { validateInputs, validateSubmit, handleChange } from '../../utils/validators.jsx';
 
 function SignUp() {
     const [inputs, setInputs] = useState({ nickname: '', id: '', pw: '', pwConfirm: '' });
     const [errors, setErrors] = useState({ nickname: '', id: '', pw: '', pwConfirm: '', });
-
-    // event handler for every inputs
-    function handleChange(e) {
-        const { name, value } = e.target;
-        const nextInputs = { ...inputs, [name]: value };
-        setInputs(nextInputs);
-
-        const errorValidation = validateInputs(nextInputs); // check error
-        setErrors(errorValidation);
-    }
 
     async function handleSubmit() {
         const isSuccess = await validateSubmit(inputs, errors);
@@ -35,22 +25,22 @@ function SignUp() {
                 <div className='input-bar-container'>
                     <InputBar
                         label="닉네임" placeholder="6자리 이내"
-                        value={inputs.nickname} onChange={handleChange} name="nickname"
+                        value={inputs.nickname} onChange={(e) => handleChange(e, inputs, setInputs, setErrors)} name="nickname"
                     /* buttonText="중복 확인" onButtonClick={handleCheck} */
                     />
                     <InputBar
                         label="아이디" placeholder="16자리 이내"
-                        value={inputs.id} onChange={handleChange} name="id"
+                        value={inputs.id} onChange={(e) => handleChange(e, inputs, setInputs, setErrors)} name="id"
                     /* buttonText="중복 확인" onButtonClick={handleCheck} */
                     />
                     <InputBar
                         label="비밀번호" placeholder="특수문자 포함 8자 이상" type="password"
-                        value={inputs.pw} onChange={handleChange} name="pw"
+                        value={inputs.pw} onChange={(e) => handleChange(e, inputs, setInputs, setErrors)} name="pw"
                     />
                 </div>
                 { /*<InputBar
             label="비밀번호 확인" placeholder="비밀번호를 한 번 더 입력해주세요" type="password"
-            value={inputs.pwConfirm} onChange={handleChange} name="pwConfirm"
+            value={inputs.pwConfirm} onChange={(e) => handleChange(e, inputs, setErrors, setInputs)} name="pwConfirm"
         />*/ }
                 <div className='submit-btn-container'>
                     <button className="submit-btn" onClick={handleSubmit}>가입하기</button>

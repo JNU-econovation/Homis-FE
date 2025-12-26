@@ -30,3 +30,8 @@ export async function signUpAPI(payload) {
         return false;
     }
 }
+
+export async function LogInAPI() {
+    return;
+    // working...
+}
