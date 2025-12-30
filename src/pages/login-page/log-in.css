@@ -1,0 +1,101 @@
+.title-con {
+    margin-top: 10vh;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.page-title {
+    font-family: 'Prtendard';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+}
+
+.signup-link {
+    width: 70vw; /* input-bar => width: 70vw.. input-bar의 width와 동일하게 */
+    text-align: right;
+
+
+    margin-top: -0.5vh;
+    margin-left: 10vw;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    color: #121212;
+}
+
+.signup-link .underline {
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer; /* no needed for tablet */
+}
+
+.login-btn-con {
+    margin-top: 46vh;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-height: 1180px) {
+    .login-btn-con {
+        margin-top: 43vh;
+    }
+}
+
+@media (max-height: 1024px) {
+    .login-btn-con {
+        margin-top: 40vh;
+    }
+}
+
+@media (max-height: 820px) {
+    .login-btn-con {
+        margin-top: 35vh;
+    }
+}
+
+@media (max-height: 768px) {
+    .login-btn-con {
+        margin-top: 33vh;
+    }
+}
+
+.login-btn {
+    width: 93vw;
+    height: 4.5vh;
+
+    border-radius: 34px;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    color: #FEFEFE;
+
+    background-color: #121212;
+    border: 0px solid #121212;
+}
+
+.error-con {
+    margin-top: -13vh;
+    margin-bottom: 13vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+.error-message {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1em;
+    letter-spacing: 0em;
+    
+    color: #F64D4D;
+}

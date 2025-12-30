@@ -4,7 +4,12 @@ export default function InputBar({ label, placeholder, type = 'text', value, onC
     return (
         <div className='input-bar-container'>
             <div className='input-bar'>
-                <label className='input-label'>{label}</label>
+                <div className='labelAndErrorWrapper'>
+                    <label className='input-label'>{label}</label>
+                    {errorMessage && (
+                        <span className='error-message'>{errorMessage}</span>
+                    )}
+                </div>
                 <div className='input-wrapper'>
                     <input
                         className={`custom-input ${errorMessage ? 'error' : ''}`}
@@ -25,9 +30,6 @@ export default function InputBar({ label, placeholder, type = 'text', value, onC
                 */}
                 </div>
             </div>
-            {errorMessage && (
-                <p className='error-message'>{errorMessage}</p>
-            )}
         </div>
     );
 }

@@ -5,7 +5,7 @@
 
     margin-top: 15vh;
 }
-
+/*
 .page-sub-title {
     max-width: 80vw;
 
@@ -20,7 +20,7 @@
 
     margin-bottom: 1vh;
 }
-
+*/
 .page-title {
     max-width: 80vw;
 
@@ -43,20 +43,44 @@
 }
 
 .submit-btn-container {
-    margin-top: 37vh;
+    margin-top: 28.5vh;
     display: flex;
     justify-content: center;
 }
 
+@media (max-height: 1180px) {
+    .submit-btn-container {
+        margin-top: 25.5vh;
+    }
+}
+
+@media (max-height: 1024px) {
+    .submit-btn-container {
+        margin-top: 21.5vh;
+    }
+}
+
+@media (max-height: 820px) {
+    .submit-btn-container {
+        margin-top: 14vh;
+    }
+}
+
+@media (max-height: 768px) {
+    .submit-btn-container {
+        margin-top: 11.5vh;
+    }
+}
+
 .submit-btn {
     width: 93vw;
-    height: 5.5vh;
+    height: 4.5vh;
 
-    border-radius: 21px;
+    border-radius: 34px;
 
     font-family: 'Pretendard';
     color: #FEFEFE;
 
-    background-color: #938181;
-    border: 0px solid #938181;
+    background-color: #121212;
+    border: 0px solid #121212;
 }

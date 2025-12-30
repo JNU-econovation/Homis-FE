@@ -1,31 +1,56 @@
 .input-bar {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 
     width: 70vw;
 
-    margin-bottom: 1vh;
+    margin-bottom: 3vh;
+}
+
+.labelAndErrorWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 63vw;
+    margin-bottom: 8px;
 }
 
 .custom-input {
     width: 63vw;
-    height: 4.5vh;
+    height: 42px;
 
-    border-radius: 5px;
-    border: 1.5px solid #B4B4B4;
+    border-radius: 39px;
+    border: 1.5px solid #F2F2F2;
 
     padding: 0 12px;
     box-sizing: border-box;
+    
+    text-align: right;
+
+    background-color: #F2F2F2;
 }
 
 .input-label {
-    flex: 0 0 85px;
-    
     font-family: 'Pretendard';
     font-weight: 500;
     font-size: 16px;
     line-height: 1em;
     letter-spacing: -0.01em;
     color: #595959;
+}
+
+/* ERROR 시 테두리 및 내부 색상 변경 */
+.custom-input.error {
+    border-color: #F64D4D;
+    background-color: #fff5f5;
+}
+
+.error-message {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1em;
+    letter-spacing: 0em;
+    color: #F64D4D;
 }
