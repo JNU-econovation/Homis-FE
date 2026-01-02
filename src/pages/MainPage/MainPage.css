@@ -1,0 +1,75 @@
+.upper-shelf-con {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* editbtn만 오른쪽으로 옮기기 위함 */
+
+    width: 80%;
+    margin: 0 auto;
+}
+
+.edit-con {
+    position: absolute;
+    right: 0px;
+    margin-top: 8vh;
+}
+
+.edit-btn {
+    background: none;
+
+    width: 102px;
+    height: 39px;
+
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: 0em;
+
+    border-radius: 43px;
+    border: 2px solid #595959;
+}
+
+.menubar-con {
+    position: fixed; /* 메뉴바는 항상 하단에 고정 */
+    bottom: 25px;
+
+    /* 가운데로 */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.designs-con {
+    margin-top: 10vh;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px 15px; /* grid-gap: (row) (col) */
+}
+
+@media (max-width: 1180px) {
+    .designs-con {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px 80px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .designs-con {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 15px 15px;
+    }
+}
+
+.img {
+    width: 257.21px;
+    height: 319.91px;
+
+    background-color: #d9d9d9;
+    border-radius: 10px;
+}

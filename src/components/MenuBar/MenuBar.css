@@ -1,0 +1,19 @@
+.menu-bar {
+    width: 240px;
+    height: 45px;
+    border-radius: 30px;
+    background-color: #fefefe;
+
+    box-shadow: 0px 1px 5.9px 0px #00000036;
+
+    /* icon 정렬 */
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    align-items: center;
+}
+
+.menu-icon {
+    width: 26px;
+    height: 26px;
+}

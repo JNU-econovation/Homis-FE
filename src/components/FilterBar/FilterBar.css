@@ -1,0 +1,44 @@
+.filter-bar-con {
+    width: 313px;
+    height: 39px;
+
+    margin-top: 8vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 4px;
+    box-sizing: border-box;
+
+    border-radius: 43px;
+    background-color: #F2F2F2;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 12px;
+    height: 100%;
+
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: 0em;
+    color: #A4A4A4;
+    white-space: nowrap;
+
+}
+
+.filter-btn.active {
+    color: #121212;
+
+    border-radius: 43px;
+    background-color: #FFFFFF;
+}
