@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from './layout/layout.jsx';
 import InputBar from '../../components/InputGroup/InputBar.jsx';
+import BackBtn from '../../components/Button/BackBtn/BackBtn.jsx';
 import './sign-up.css';
 import { validateSubmit, handleChange } from '../../utils/validators.jsx';
 
 function SignUp() {
-    const [inputs, setInputs] = useState({ nickname: '', id: '', pw: '', pwConfirm: '' });
+    const [inputs, setInputs] = useState({ nickname: '', id: '', pw: '', pwConfirm: '', });
     const [errors, setErrors] = useState({ nickname: '', id: '', pw: '', pwConfirm: '', });
     const navigate = useNavigate();
 
@@ -17,11 +18,16 @@ function SignUp() {
 
     return (
         <Layout>
-            <div className='title-container'>
-                { /* <h2 className='page-sub-title'>뜨개에 편안함을 플러스 하다!</h2> */}
-                <h1 className='page-title'>'뜨개 도아' 가입하기</h1>
+            <div className='signup-wrapper'>
+                <div className='signup-back-btn-container'>
+                    <BackBtn link='/login' />
+                </div>
+                <div className='signup-title-container'>
+                    { /* <h2 className='page-sub-title'>뜨개에 편안함을 플러스 하다!</h2> */}
+                    <h1 className='signup-page-title'>Knit Doa</h1>
+                </div>
             </div>
-            <div className='input-bar-container'>
+            <form className='signup-input-bar-container'>
                 <InputBar
                     label="닉네임" placeholder="닉네임"
                     value={inputs.nickname} onChange={(e) => handleChange(e, inputs, setInputs, setErrors)} name="nickname"
@@ -44,10 +50,10 @@ function SignUp() {
                     value={inputs.pwConfirm} onChange={(e) => handleChange(e, inputs, setInputs, setErrors)} name="pwConfirm"
                     errorMessage={errors.pwConfirm}
                 />
-            </div>
+            </form>
 
-            <div className='submit-btn-container'>
-                <button className="submit-btn" onClick={handleSubmit}>가입하기</button>
+            <div className='signup-submit-btn-container'>
+                <button className="signup-submit-btn" onClick={handleSubmit}>가입하기</button>
             </div>
         </Layout>
     );

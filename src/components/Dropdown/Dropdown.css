@@ -1,0 +1,100 @@
+.dropdown-container {
+    position: relative;
+    width: 182px; /* 전체 사이즈를 182px로.. 기준점 */
+    margin-bottom: 30px;
+}
+
+.dropdown-label-container {
+    margin-bottom: 5px;
+}
+
+.dropdown-label {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+
+    color: #000000;
+}
+
+.dropdown-label.error-case {
+    font-weight: 700;
+}
+
+.dropdown-label.add-star {
+    color: #F64D4D;
+    font-weight: 700;
+}
+
+.dropdown-trigger {
+    width: 100%;
+    height: 42px;
+    border-radius: 6px;
+    border: 2px solid #767676;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.dropdown-trigger.opened {
+    border-bottom-left-radius: 0px;
+}
+
+.dropdown-trigger-img {
+    width: 16px;
+    height: 15px;
+}
+
+.word {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+
+    color: #767676;
+}
+
+.dropdown-menu {
+    width: 85%;
+
+    background-color: #fefefe;
+    border: 2px solid #767676;
+
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 0;
+    z-index: 100;
+    box-sizing: border-box;
+    overflow: hidden;
+    
+    border-top: none;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 12px 0;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+
+    color: #767676;
+
+    border-bottom: 1.5px solid #767676;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}

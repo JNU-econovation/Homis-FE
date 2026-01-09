@@ -1,0 +1,9 @@
+.save-btn {
+    border: none;
+    background: none;
+}
+
+.save-btn img {
+    width: 41px;
+    height: 41px;
+}

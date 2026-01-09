@@ -29,7 +29,60 @@ export function validateInputs(input) {
     if (input.pwConfirm.length > 0)
         if (input.pw !== input.pwConfirm)
             newErrors.pwConfirm = '비밀번호가 일치하지 않습니다.';
-    
+
+    return newErrors;
+}
+
+export function validateAddItemDescription(input, errors) {
+    if (input.description.length <= 0) {
+        errors.description = '*값을 입력해 주세요.';
+    }
+    if (input.description.length > 1000)
+        errors.description = `*입력할 수 있는 글자 수를 초과했습니다.${`(${input.description.length}/1000자)`}`;
+
+    return errors;
+}
+
+export function validateInputsForAddItem(input, errors) {
+    const newErrors = {
+        itemName: '',
+        itemType: '',
+        usedNeedle: '',
+        size: '',
+        gauge: '',
+        description: '',
+        threadUsage: '',
+        price: '',
+    };
+    newErrors.description = errors.description; // 이거 없으면 버튼 클릭 시 description 에러 문구가 날라가서, backup 해두는 것
+    const within_30 = '*30자 내로 입력해주세요.';
+
+    /* Object.entries() => object -> array로 변환 */
+    Object.entries(input).forEach(([key, value]) => {
+        if (value.length <= 0)
+            newErrors[key] = '*값을 입력해 주세요.';
+    });
+
+    if (input.itemName.length > 16)
+        newErrors.itemName = '*상품명을 16자 이내로 입력해주세요.';
+
+    if (input.usedNeedle.length > 30)
+        newErrors.usedNeedle = within_30;
+
+    if (input.size.length > 30)
+        newErrors.size = within_30;
+
+    if (!input.itemType)
+        newErrors.itemType = '타입 선택 안 됨';
+
+    if (input.gauge.length > 30)
+        newErrors.gauge = within_30;
+
+    if (!input.registeredFile)
+        newErrors.registeredFile = '파일 업로드 안 됨';
+
+    if (input.threadUsage.length > 30)
+        newErrors.threadUsage = within_30;
     return newErrors;
 }
 
@@ -54,7 +107,7 @@ export async function validateSubmit(inputs, errors) {
 }
 
 // event handler for all inputs in InputBar component
-export function handleChange(e, inputs, setInputs, setErrors=null) {
+export function handleChange(e, inputs, setInputs, setErrors = null) {
     const { name, value } = e.target;
     const nextInputs = { ...inputs, [name]: value };
     setInputs(nextInputs);
@@ -62,6 +115,36 @@ export function handleChange(e, inputs, setInputs, setErrors=null) {
     if (setErrors != null) {
         const errorValidation = validateInputs(nextInputs);
         setErrors(errorValidation);
+    }
+}
+
+export function handleChangeForAddItem(e, inputs, setInputs, errors, setErrors = null) {
+    const { name, value } = e.target;
+    const nextInputs = { ...inputs, [name]: value };
+    setInputs(nextInputs);
+
+    /*
+    Description에 대한 change는 setErrors에 함수가 넘어와서 해당 명령을 수행함.
+    즉, Description일 때만 true가 추가로 전달돼서, 이때에는 Description에 대한 error만 검사하도록 흐름 제어
+    */
+    if (setErrors != null) {
+        if (errors.description.length <= 1000) {
+            errors.description = '';
+            setErrors(errors);
+        }
+        const errorValidation = validateAddItemDescription(nextInputs, errors);
+        setErrors(errorValidation);
+    }
+}
+
+export function handleClickAddItem(inputs, errors, setErrors) {
+    const errorValidation = validateInputsForAddItem(inputs, errors);
+    setErrors(errorValidation);
+
+    const hasError = Object.values(errors).some(value => value !== ''); // 빈 문자열 아닌 것이 하나라도 있다면 true 반환. 즉, 에러가 있다는 의미
+    if (!hasError) {
+        // REGISTER ITEM ACI CALL
+        return;
     }
 }
 

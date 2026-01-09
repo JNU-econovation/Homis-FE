@@ -1,0 +1,149 @@
+/* Modal Component를 화면 중앙에 고정하기 위함 */
+.design-modal-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #121212B2;
+}
+
+.design-modal-container {
+    width: 487px;
+    height: 327px;
+
+    border-radius: 30px;
+    background-color: #fefefe;
+
+    box-shadow: 0px 0px 7.1px 0px #00000091;
+
+    padding-left: 24px;
+    padding-right: 24px;
+
+    box-sizing: border-box; /* 패딩 줘도 전체 박스 사이즈(487px)보다 안 커지게 */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid #f2f2f2;
+
+    padding-top: 15px;
+    padding-bottom: 9px;
+}
+
+.modal-close-btn-con {
+    padding-top: 9px;
+}
+
+.modal-title {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+}
+
+.input-name-con {
+    margin-top: 40px;
+    margin-left: 45px;
+}
+
+.input-label {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-right: 8px;
+
+    color: #000000;
+}
+
+.modal-input {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 64px;
+    height: 28px;
+
+    padding-top: 2px;
+    padding-right: 23px;
+    padding-bottom: 2px;
+    padding-left: 23px;
+}
+
+.for-title {
+    width: 270px;
+}
+
+.for-size {
+    width: 35px;
+}
+
+.input-size-con {
+    margin-top: 30px;
+    margin-left: 45px;
+}
+
+.unit-text {
+    margin-left: 4px;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    text-align: center;
+
+    color: #000000;
+}
+
+.input-label.height {
+    margin-left: 30px;
+}
+
+.modal-input::placeholder {
+    color: #000000;
+
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+}
+
+.modal-footer {
+    margin-top: 50px;
+}
+
+.create-design-btn {
+    width: 438px;
+    height: 42px;
+
+    border-radius: 64px;
+    background-color: #121212;
+    border: none;
+
+    color: #fefefe;
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-btn {
+    width: 17px;
+    height: 17px;
+}

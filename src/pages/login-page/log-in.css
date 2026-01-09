@@ -1,11 +1,17 @@
-.title-con {
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.login-title-con {
     margin-top: 10vh;
     
     display: flex;
     justify-content: center;
 }
 
-.page-title {
+.login-page-title {
     font-family: 'Prtendard';
     font-weight: 600;
     font-size: 24px;
@@ -16,7 +22,6 @@
 .signup-link {
     width: 70vw; /* input-bar => width: 70vw.. input-bar의 width와 동일하게 */
     text-align: right;
-
 
     margin-top: -0.5vh;
     margin-left: 10vw;
@@ -35,33 +40,40 @@
     cursor: pointer; /* no needed for tablet */
 }
 
+.login-input-bar-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 19vh;
+}
+
 .login-btn-con {
-    margin-top: 46vh;
+    margin-top: 44.5vh;
     display: flex;
     justify-content: center;
 }
 
 @media (max-height: 1180px) {
     .login-btn-con {
-        margin-top: 43vh;
+        margin-top: 42vh;
     }
 }
 
 @media (max-height: 1024px) {
     .login-btn-con {
-        margin-top: 40vh;
+        margin-top: 39vh;
     }
 }
 
 @media (max-height: 820px) {
     .login-btn-con {
-        margin-top: 35vh;
+        margin-top: 34vh;
     }
 }
 
 @media (max-height: 768px) {
     .login-btn-con {
-        margin-top: 33vh;
+        margin-top: 32vh;
     }
 }
 
@@ -79,18 +91,18 @@
     color: #FEFEFE;
 
     background-color: #121212;
-    border: 0px solid #121212;
+    border: none;
 }
 
-.error-con {
-    margin-top: -13vh;
-    margin-bottom: 13vh;
-
+.login-error-con {
+    position: absolute;
+    top: 5.5vh;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.error-message {
+.login-error-message {
     font-family: 'Pretendard';
     font-weight: 700;
     font-size: 14px;

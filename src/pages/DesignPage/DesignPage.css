@@ -1,0 +1,48 @@
+.design-page-overlay {
+    width: 100%;
+    height: 100vh;
+}
+
+.design-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 12%;
+    background-color: #f2f2f2;
+    padding: 0 1.9vw;
+    box-sizing: border-box;
+}
+
+.design-title {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    text-align: center;
+
+    color: #000000;
+}
+
+.tool-con {
+    width: 66px;
+    height: 148px;
+    padding-left: 2.5vw;
+    padding-top: 65vh;
+}
+
+.brush-btn {
+    margin-top: 20px;
+}
+
+.design-page-body {
+    display: flex;
+    justify-content: space-between;
+    height: 88%; /* design-header가 height: 12% 차지 */
+}
+
+.grid-board-con {
+    margin-top: 10vh;
+}

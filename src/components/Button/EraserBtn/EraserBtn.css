@@ -1,0 +1,26 @@
+.eraser-btn {
+    border: none;
+    padding: 0px;
+    
+    width: 65px;
+    height: 65px;
+    border-radius: 50%; /* 원으로 변경 */
+
+    background-color: #F2F2F2;
+    box-shadow: 0px 0px 2.9px 0px #000000DE;
+
+    /* Icon 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* btn 컴포넌트 내 img 사이즈 조절 */
+.eraser-btn img {
+    width: 36px;
+    height: 36px;
+}
+
+.eraser-btn.selected {
+    background-color: #071111;
+}

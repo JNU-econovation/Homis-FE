@@ -1,20 +1,46 @@
+import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignUp from './pages/signup-page/sign-up.jsx';
 import LogIn from './pages/login-page/log-in.jsx';
-import MenuBar from './components/MenuBar/MenuBar.jsx';
+import MenuBar from './components/Bar/MenuBar/MenuBar.jsx';
 import MainPage from './pages/MainPage/MainPage.jsx'
+import EraserBtn from './components/Button/EraserBtn/EraserBtn.jsx';
+import BrushBtn from './components/Button/BrushBtn/BrushBtn.jsx';
+import DesignPage from './pages/DesignPage/DesignPage.jsx'
+import DesignSettingModal from './components/Modals/DesignSettingModal/DesignSettingModal.jsx';
+import ColorBtn from './components/Button/ColorBtn/ColorBtn.jsx';
+import ImageUploadBox from './components/Item/ImageUploadBox/ImageUploadBox.jsx';
+import ImagePreviewBox from './components/Item/ImagePreviewBox/ImagePreviewBox.jsx';
+import AddItemPage from './pages/AddItemPage/AddItemPage.jsx';
+import Dropdown from './components/Dropdown/Dropdown.jsx';
+import UploadBtn from './components/Button/UploadBtn/UploadBtn.jsx';
 
 export default function App() {
   return (
     <BrowserRouter>
-        {/* <Routes>
+        <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
-        </Routes> */}
-       
+          <Route path='/main' element={<MainPage />} />
+          <Route path='/design' element={<DesignPage />} />
+        </Routes>
 
-        <MainPage />
+       {/* <ColorBtn /> */}
+        {/* <MainPage /> }
+        {/* <EraserBtn /> */}
+        {/* <BrushBtn /> */}
+        {/* <DesignPage /> */}
+        {/* <DesignSettingModal /> */}
+        {/* <ImageUploadBox /> */}
+        {/* <ImagePreviewBox /> */}
+        {/* <AddItemPage /> */}
+        {/* <Dropdown 
+          options={['코바늘', '대바늘', '코바늘&대바늘', '아프간']}
+        /> */}
+        {/* <UploadBtn 
+          label='파일 등록 (PDF)'
+        /> */}
     </BrowserRouter>
   );
 }

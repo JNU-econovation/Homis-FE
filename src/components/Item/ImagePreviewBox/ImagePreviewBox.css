@@ -1,0 +1,53 @@
+.image-preview-box {
+    width: 123px;
+    height: 123px;
+
+    border-radius: 10px;
+    border: 2px solid #767676;
+
+    background-color: #f2f2f2;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
+}
+
+.preview-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+.image-delete-btn-con {
+    width: 19px;
+    height: 19px;
+    
+    border-radius: 5px;
+    border: 1.5px solid #000000;
+
+    background-color: #fefefe;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 6px;
+    margin-right: 6px;
+
+    position: relative;
+    z-index: 1; /* preview-img(0)보다 더 높은 층 */
+}
+
+.image-delete-btn {
+    width: 13px;
+    height: 13px;
+}

@@ -1,0 +1,53 @@
+.add-item-input-label {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+
+    margin-bottom: 5px; /* 라벨과 입력창 사이의 간격 */
+}
+.add-item-input-label.error-case {
+    font-weight: 700;
+}
+.add-star {
+    color: #F64D4D;
+}
+
+.add-item-input {
+    height: 42px;
+
+    border-radius: 6px;
+    border: 2px solid #767676;
+    margin-top: 4px;
+
+    display: flex;
+    padding-left: 10px;
+    
+}
+
+.add-item-input.textarea {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.add-item-input-components-wrapper {
+    margin-bottom: 30px;
+}
+
+.add-item-input-label-and-error-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.add-item-input-error-message {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    
+    color: #F64D4D;
+}
+

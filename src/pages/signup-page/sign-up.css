@@ -1,9 +1,13 @@
-.title-container {
+.signup-wrapper {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+}
 
-    margin-top: 15vh;
+.signup-back-btn-container {
+    position: absolute; /* independent from parent(upper-shelf..) */
+    left: -3vw;
+    top: 8.5vh;
 }
 /*
 .page-sub-title {
@@ -21,9 +25,8 @@
     margin-bottom: 1vh;
 }
 */
-.page-title {
-    max-width: 80vw;
-
+.signup-page-title {
+    margin-top: 8.5vh;
     font-family: 'Pretendard';
     font-weight: 600;
     font-size: 24px;
@@ -33,46 +36,46 @@
 
     color: #000000;
 
-    margin-bottom: 16vh;
+    margin-bottom: 17vh;
 }
 
-.input-bar-container {
+.signup-input-bar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.submit-btn-container {
-    margin-top: 28.5vh;
+.signup-submit-btn-container {
+    margin-top: 34.5vh;
     display: flex;
     justify-content: center;
 }
 
 @media (max-height: 1180px) {
-    .submit-btn-container {
-        margin-top: 25.5vh;
+    .signup-submit-btn-container {
+        margin-top: 31.5vh;
     }
 }
 
 @media (max-height: 1024px) {
-    .submit-btn-container {
-        margin-top: 21.5vh;
+    .signup-submit-btn-container {
+        margin-top: 27.5vh;
     }
 }
 
 @media (max-height: 820px) {
-    .submit-btn-container {
-        margin-top: 14vh;
+    .signup-submit-btn-container {
+        margin-top: 20vh;
     }
 }
 
 @media (max-height: 768px) {
-    .submit-btn-container {
-        margin-top: 11.5vh;
+    .signup-submit-btn-container {
+        margin-top: 17.5vh;
     }
 }
 
-.submit-btn {
+.signup-submit-btn {
     width: 93vw;
     height: 4.5vh;
 
