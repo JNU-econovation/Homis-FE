@@ -15,13 +15,13 @@ function getKSTDate() {
 export default function DesignSettingModal({ onClick }) {
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [size, setSize] = useState({ width: '', height: '' });
+    const [size, setSize] = useState({ pixelSize: '' });
 
     function handleClickCreateDesign() {
         let finalName = name;
 
-        if (!size.width || !size.height) {
-            alert('가로, 세로 값을 모두 입력해 주세요');
+        if (!size.pixelSize) {
+            alert('픽셀 크기를 입력해 주세요.');
             return;
         }
 
@@ -34,8 +34,8 @@ export default function DesignSettingModal({ onClick }) {
         navigate('/design', {
             state: {
                 title: finalName,
-                width: size.width,
-                height: size.height,
+                width: size.pixelSize,
+                height: size.pixelSize,
             }
         });
     }
@@ -52,28 +52,29 @@ export default function DesignSettingModal({ onClick }) {
                     </div>
                 </div>
                 <div className='modal-body'>
-                    <div className='input-name-con'>
-                        <span className='input-label'>제목</span>
-                        <input
-                            type='text'
-                            className='modal-input for-title'
-                            placeholder='제목을 입력하세요.'
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-                    <div className='input-size-con'>
-                        <span className='input-label'>가로</span>
-                        <input
-                            type='text'
-                            className='modal-input for-size'
-                            placeholder='123'
-                            value={size.width}
-                            onChange={(e) => setSize({ ...size, width: e.target.value })}
-                        />
-                        <span className='unit-text'>px</span>
-
-                        <span className='input-label height'>세로</span>
+                    <div className='design-modal-input-group'>
+                        <div className='input-name-con'>
+                            <span className='input-label'>제목</span>
+                            <input
+                                type='text'
+                                className='modal-input for-title'
+                                placeholder='제목을 입력하세요.'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                        <div className='input-size-con'>
+                            <span className='input-label'>크기</span>
+                            <input
+                                type='text'
+                                className='modal-input for-size'
+                                placeholder='123'
+                                value={size.pixelSize}
+                                onChange={(e) => setSize({ ...size, pixelSize: e.target.value })}
+                            />
+                            <span className='unit-text'>px</span>
+                            { /* 가로, 세로 입력X. 크기 하나로 통일 */}
+                            {/* <span className='input-label height'>세로</span>
                         <input
                             type='text'
                             className='modal-input for-size'
@@ -81,7 +82,8 @@ export default function DesignSettingModal({ onClick }) {
                             value={size.height}
                             onChange={(e) => setSize({ ...size, height: e.target.value })}
                         />
-                        <span className='unit-text'>px</span>
+                        <span className='unit-text'>px</span> */}
+                        </div>
                     </div>
                 </div>
                 <div className='modal-footer'>

@@ -26,6 +26,8 @@
     
 }
 
+
+
 .add-item-input.textarea {
     width: 100%;
     padding-top: 10px;
@@ -51,3 +53,15 @@
     color: #F64D4D;
 }
 
+.add-item-input.price {
+    text-align: right;
+    padding-right: 7px;
+}
+
+.add-item-input.price::placeholder {
+    text-align: left;
+}
+
+.add-item-input.price:focus::placeholder {
+    color: #fefefe;
+}

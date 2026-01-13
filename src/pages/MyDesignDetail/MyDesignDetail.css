@@ -1,0 +1,34 @@
+.my-design-detail-header {
+    margin-top: 7vh;
+    margin-left: -5vw;
+}
+
+.my-design-detail-body {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.my-design-title-and-img-container {
+    display: flex;
+    flex-direction: column;
+    
+    width: 376px;
+    height: 471px;
+    background-color: red;
+    border-radius: 10px;
+
+    padding-top: 70px;
+    padding-right: 36px;
+    padding-bottom: 70px;
+    padding-left: 36px;
+
+    box-sizing: border-box;
+}
+
+.my-design-detail-footer {
+    margin-top: 10vh;
+    margin-left: 1000px;
+}

@@ -53,7 +53,14 @@
 
 .input-name-con {
     margin-top: 40px;
-    margin-left: 45px;
+    
+    display: flex;
+    align-items: center;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
 }
 
 .input-label {
@@ -81,7 +88,7 @@
 }
 
 .for-title {
-    width: 270px;
+    width: 170px;
 }
 
 .for-size {
@@ -90,7 +97,9 @@
 
 .input-size-con {
     margin-top: 30px;
-    margin-left: 45px;
+
+    display: flex;
+    align-items: center;
 }
 
 .unit-text {
@@ -105,9 +114,9 @@
     color: #000000;
 }
 
-.input-label.height {
+/* .input-label.height {
     margin-left: 30px;
-}
+} */
 
 .modal-input::placeholder {
     color: #000000;

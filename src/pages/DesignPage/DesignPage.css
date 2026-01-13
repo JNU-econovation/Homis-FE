@@ -5,14 +5,27 @@
 
 .design-page-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     width: 100%;
     height: 12%;
     background-color: #f2f2f2;
-    padding: 0 1.9vw;
-    box-sizing: border-box;
+}
+
+.close-btn-con {
+    position: absolute;
+    left: 3%;
+}
+
+.save-btn-con {
+    position: absolute;
+    right: 3%;
+}
+
+.undo-redo-btn-container-in-design-page {
+    position: absolute;
+    right: 9%;
 }
 
 .design-title {
@@ -44,5 +57,8 @@
 }
 
 .grid-board-con {
-    margin-top: 10vh;
+    margin-top: 6vh;
+
+    height: fit-content; /* html2canvas로 캡처 시 별다른 설정 없다면 부모 사이즈만큼 캡처됨. 여백 줄이기 위해 직접 높이를 지정 */
 }
+

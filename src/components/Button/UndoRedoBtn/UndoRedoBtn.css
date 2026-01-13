@@ -1,0 +1,21 @@
+.undo-btn {
+    border: none;
+    /* background-color: #fefefe; */
+    background-color: #f2f2f2;
+}
+
+.redo-btn {
+    border: none;
+    /* background-color: #fefefe; */
+    background-color: #f2f2f2;
+}
+
+.undo-btn-img, .redo-btn-img {
+    width: 80%;
+    height: 80%;
+}
+
+.undo-btn:disabled .undo-btn-img,
+.redo-btn:disabled .redo-btn-img {
+    opacity: 0.3;
+}

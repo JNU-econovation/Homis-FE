@@ -14,20 +14,25 @@ import ImagePreviewBox from './components/Item/ImagePreviewBox/ImagePreviewBox.j
 import AddItemPage from './pages/AddItemPage/AddItemPage.jsx';
 import Dropdown from './components/Dropdown/Dropdown.jsx';
 import UploadBtn from './components/Button/UploadBtn/UploadBtn.jsx';
+import SaveDetailPage from './pages/SaveDetailPage/SaveDetailPage.jsx';
+import LoadingModal from './components/Modals/LoadingModal/LoadingModal.jsx';
+import DownloadBtn from './components/Button/DownloadBtn/DownloadBtn.jsx';
+import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
 
 export default function App() {
   return (
     <BrowserRouter>
-        <Routes>
+        {/* <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/main' element={<MainPage />} />
           <Route path='/design' element={<DesignPage />} />
-        </Routes>
+          <Route path='/save-detail' element={<SaveDetailPage />} />
+        </Routes> */}
 
        {/* <ColorBtn /> */}
-        {/* <MainPage /> }
+        {/* <MainPage /> */}
         {/* <EraserBtn /> */}
         {/* <BrushBtn /> */}
         {/* <DesignPage /> */}
@@ -41,6 +46,10 @@ export default function App() {
         {/* <UploadBtn 
           label='파일 등록 (PDF)'
         /> */}
+        {/* <SaveDetailPage /> */}
+        {/* <LoadingModal text='창작한 도안 저장 중'/> */}
+        {/* <DownloadBtn /> */}
+        <MyDesignDetail />
     </BrowserRouter>
   );
 }

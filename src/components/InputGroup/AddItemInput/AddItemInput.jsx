@@ -27,7 +27,7 @@ export default function AddItemInput({ label, placeholder, type = 'text', value,
                     :
                     <input
                         name={name}
-                        className='add-item-input'
+                        className={`add-item-input ${name === 'price' ? 'price' : ''}`}
                         placeholder={placeholder}
                         type={type}
                         value={value}

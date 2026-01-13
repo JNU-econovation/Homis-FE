@@ -1,4 +1,4 @@
-.upper-shelf-con-mainpage {
+.main-page-header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,10 +66,18 @@
     }
 }
 
-.img {
+.design-img-con {
     width: 257.21px;
     height: 319.91px;
-
+    
     background-color: #d9d9d9;
     border-radius: 10px;
+}
+
+.main-page-img {
+    width: 207px;
+    height: 207px;
+    
+    margin: 56.45px 25.11px;
+    box-shadow: 0px 0px 35.9px 0px #0000003B;
 }

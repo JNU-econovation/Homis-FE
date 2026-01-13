@@ -1,9 +1,24 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 .save-btn {
     border: none;
     background: none;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 13%;
+    text-decoration-thickness: 8.5%;
+    text-decoration-skip-ink: auto;
 }
 
-.save-btn img {
+/* .save-btn img {
     width: 41px;
     height: 41px;
-}
+} */
