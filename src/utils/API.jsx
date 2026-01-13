@@ -207,3 +207,17 @@ export async function designIMadeAPI(requestHeader) {
         }
     }
 }
+
+export async function getDesignIMadeDetailAPI(accessToken) {
+    try {
+        const response = await axios.get(`${BASE_URL}/design-make/detail`, {
+            headers: requestHeader
+        });
+        const res = response.data;
+
+        if (res.success) {
+            return res.data;
+        }
+        return false;
+    }
+}

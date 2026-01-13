@@ -3,6 +3,7 @@ import './MyDesignDetail.css';
 
 import DownloadBtn from '../../components/Button/DownloadBtn/DownloadBtn.jsx';
 import BackBtn from '../../components/Button/BackBtn/BackBtn.jsx';
+import sample_design_img from '../../assets/sample/sample-design-img.png';
 
 export default function MyDesignDetail({ dataId, img = null, title = 'test', description = 'test description' }) {
     const [currentData, setCurrentData] = useState({ img: '', title: '', description: '' });
@@ -21,24 +22,24 @@ export default function MyDesignDetail({ dataId, img = null, title = 'test', des
                 <div className='my-design-title-and-img-container'>
                     <div className='my-design-img-background'>
                         <img className='my-design-img'
-                            src={img} alt='mydesign img'
+                            src={sample_design_img} alt='mydesign img'
                         />
                     </div>
                     <span className='my-design-title'>{title}</span>
                 </div>
-                <div className='my-design-description-con'>
+                <div className='my-design-description-and-download-btn-con'>
                     <textarea className='my-design-description' 
                         value={description}
                         readOnly={true}
                     />
+                    <div className='my-design-download-btn'>
+                        <DownloadBtn
+                            madeDataId={dataId}
+                            madeName={title}
+                        />
+                    </div>
                 </div>
             </div>
-            <div className='my-design-detail-footer'>
-                <DownloadBtn 
-                    madeDataId={dataId}
-                    madeName={title}
-                />
-            </div>
-        </div >
+        </div>
     );
 }

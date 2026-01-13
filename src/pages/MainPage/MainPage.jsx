@@ -3,7 +3,7 @@ import MenuBar from '../../components/Bar/MenuBar/MenuBar.jsx';
 import FilterBar from '../../components/Bar/FilterBar/FilterBar.jsx';
 import DesignSettingModal from '../../components/Modals/DesignSettingModal/DesignSettingModal.jsx';
 import { useNavigate } from 'react-router-dom';
-import { getAccessToken, designIMadeAPI } from '../../utils/API.jsx';
+import { getAccessToken, designIMadeAPI, getDesignIMadeDetailAPI } from '../../utils/API.jsx';
 import './MainPage.css';
 
 export default function MainPage() {
@@ -18,7 +18,7 @@ export default function MainPage() {
     ];
 
     // useEffect() 사용해서 currentTab 바뀔 때마다 다시 렌더링 하도록...
-    // useEffect()의 첫 번째 인자: clean-up(or undefiend)를 반환하는 함수여야.. async 함수는 promise 반환하므로, 첫 인자로 async 함수 쓰면 X.
+    // useEffect()의 첫 번째 인자: clean-up(or undefiend)을 반환하는 함수여야.. async 함수는 promise 반환하므로, 첫 인자로 async 함수 쓰면 X.
     // 해결책: async 함수를 실행하는 일반 함수를 생성하고, 그걸 인자로 전달
     useEffect(function () {
         async function fetchData() {
@@ -60,6 +60,25 @@ export default function MainPage() {
         fetchData(); // 일반 함수 내에 async 함수를 정의하고, 일반 함수 내에서 async 함수(fetchData())를 실행함
     }, [currentTab]);
 
+    async function handleDesignClick() {
+        const accessToken = getAccessToken();
+        if (!accessToken) {
+            console.log('no access token');
+                alert('로그인 후 이용 가능합니다.');
+                navigate('/login');
+                return;
+        }
+        switch (currentTab) {
+            case 'all':
+                break;
+            case 'created':
+                const requestHeader = {
+                    'Authorization': `Bearer ${accessToken}`,
+                };
+                const apiRes = await getDesignIMadeDetailAPI(requestHeader);
+        }
+    }
+
     return (
         <div className='mypage-con'>
             <div className='main-page-header'>
@@ -75,7 +94,7 @@ export default function MainPage() {
                         <DesignSettingModal onClick={() => setIsModalOpen(false)} />}
                 </div>
             </div>
-            <div className='designs-con'>
+            <div className='designs-con' onClick={}>
                 {currentData.map((item) => (
                     <div key={item.madeDataId} className='design-img-con'>
                         <img className='main-page-img' src={item.madeImgUrl} alt='design img' /> { /* madeName: 도안 이름도 있지만, 아직 쓸 일 X */}

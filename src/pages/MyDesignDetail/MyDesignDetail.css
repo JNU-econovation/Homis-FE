@@ -1,34 +1,75 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 .my-design-detail-header {
-    margin-top: 7vh;
-    margin-left: -5vw;
+    margin-top: 10vh;
+    margin-left: -2vw;
 }
 
 .my-design-detail-body {
-    margin-top: 5vh;
+    margin-top: 10vh;
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
+
+    gap: 30px;
 }
 
 .my-design-title-and-img-container {
     display: flex;
     flex-direction: column;
-    
-    width: 376px;
-    height: 471px;
-    background-color: red;
-    border-radius: 10px;
-
-    padding-top: 70px;
-    padding-right: 36px;
-    padding-bottom: 70px;
-    padding-left: 36px;
-
-    box-sizing: border-box;
+    gap: 10px;
 }
 
-.my-design-detail-footer {
-    margin-top: 10vh;
-    margin-left: 1000px;
+.my-design-img-background {
+    width: 376px;
+    height: 471px;
+    
+    padding: 132px 84.5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    background-color: #d9d9d9;
+}
+
+.my-design-title {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    vertical-align: bottom;
+}
+
+.my-design-description {
+    width: 548px;
+    height: 471px;
+
+    border: none;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+
+    padding: 15px 15px;
+    box-sizing: border-box;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.4em;
+    letter-spacing: -0.01em;
+
+    color: #000000;
+}
+
+.my-design-img {
+    width: 207px;
+    height: 207px;
+
+    box-shadow: 0px 0px 35.9px 0px #0000003B;
+}
+
+.my-design-download-btn {
+    display: flex;
+    justify-content: right;
+    margin-top: 5vh;
 }
