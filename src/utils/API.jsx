@@ -16,8 +16,9 @@ export async function signUpAPI(payload) {
     catch (error) {
         if (error.response && error.response.data) { // .response => 서버 응답 && .response.data => .data 필드가 없을 수도 있음(5xx 등의 경우)
             const errRes = error.response.data;
+            const errorCode = errRes.code;
 
-            switch (errRes.code) {
+            switch (errorCode) {
                 case "901_DUPLICATED_USER_NAME":
                     alert("이미 등록된 아이디입니다.\n다시 입력해 주세요.");
                     break;
@@ -51,8 +52,9 @@ export async function LogInAPI(payload, setError) {
     catch (error) {
         if (error.response && error.response.data) {
             const errRes = error.response.data;
+            const errorCode = errRes.code;
 
-            switch (errRes.code) {
+            switch (errorCode) {
                 case "002_NOT_USER":
                     setError("존재하지 않는 ID입니다.");
                     break;
@@ -94,8 +96,9 @@ export async function SaveDesignAPI(requestBody, requestHeader, setUploadProgres
     catch (error) {
         if (error.response && error.response.data) {
             const errRes = error.response.data;
+            const errorCode = errRes.code;
 
-            switch (errRes) {
+            switch (errorCode) {
                 case '400':
                     alert('Request Error');
                     break;
@@ -162,7 +165,17 @@ export async function SaveDesignAPI(requestBody, requestHeader, setUploadProgres
 
 export function getAccessToken() {
     const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) throw new Error('AUTH_REQUIRED');
     return accessToken;
+}
+
+export function handleAuthError(error, navigate) {
+    if (error.message === 'AUTH_REQUIRED') {
+        console.log('no access token');
+        alert('로그인 후 이용 가능합니다.');
+        navigate('/login');
+    }
+    else console.log(error); // 예기치 못한 에러
 }
 
 export async function designIMadeAPI(requestHeader) {
@@ -179,9 +192,10 @@ export async function designIMadeAPI(requestHeader) {
     }
     catch (error) {
         if (error.response && error.response.data) {
-            const  errRes = error.response.data;
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
 
-            switch (errRes) {
+            switch (errorCode) {
                 case '100_UNKNOWN_AUTH_ERROR':
                     alert('알 수 없는 사용자 인증 오류');
                     break;
@@ -197,7 +211,7 @@ export async function designIMadeAPI(requestHeader) {
                 default:
                     alert('500 Internal Server Error');
                     break;
-                
+
             }
             return false;
         }
@@ -208,16 +222,122 @@ export async function designIMadeAPI(requestHeader) {
     }
 }
 
-export async function getDesignIMadeDetailAPI(accessToken) {
+export async function getDesignIMadeDetailAPI(requestHeader, requestBody) {
     try {
         const response = await axios.get(`${BASE_URL}/design-make/detail`, {
+            params: requestBody,
             headers: requestHeader
         });
         const res = response.data;
 
         if (res.success) {
-            return res.data;
+            return res.data; /* res.data => { madeDataId: ..., madeImgUrl: ..., .... } */
         }
         return false;
     }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data; /* errRes => 객체 전체임. code: '...', ...: '...', */
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '300_NOT_OWNER':
+                    alert('게시글 작성자가 아닙니다.');
+                    break;
+                case '400_NOT_FOUND_MADE':
+                    alert('존재하지 않는 도안 제작 게시글에 대한 접근');
+                    break;
+                default:
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function downloadDesignIMadeAPI(requestHeader, requestBody) {
+    try {
+        const response = await axios.post(`${BASE_URL}/design-make/download`, requestBody, {
+            headers: requestHeader,
+            responseType: 'blob',
+        });
+        // console.log(response.data);
+        // console.log(response.data instanceof Blob);
+        // console.log(response.headers['content-disposition']);
+        return response; // blob 통째로 ret
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            let errorCode;
+
+            if (error.response.data instanceof Blob) {
+                const errorText = await error.response.data.text(); // blob으로 감싼 걸 errorText에 넣고,
+                const errRes = JSON.parse(errorText); // errorText를 json으로 파싱
+                errorCode = errRes.code;
+            }
+            else {
+                const errRes = error.response.data;
+                errorCode = errRes.code;
+            }
+
+            switch (errorCode) {
+                case '400':
+                    alert('요청 문제');
+                    break;
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '300_NOT_OWNER':
+                    alert('게시글 작성자가 아닙니다.');
+                    break;
+                case '400_NOT_FOUND_MADE':
+                    alert('존재하지 않는 도안 제작 게시글에 대한 접근');
+                    break;
+                case '0019_BLOB_FAILED_LOAD_STREAM':
+                    alert('BLOB에 대해 STREAM 로드 실패');
+                    break;
+                default:
+                    alert('500 Internal Server Error');
+                    break;
+            }
+
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+
+        }
+    }
+    throw error;
 }

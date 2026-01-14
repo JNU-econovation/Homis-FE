@@ -59,6 +59,8 @@
     letter-spacing: -0.01em;
 
     color: #000000;
+
+    resize: none; /* textarea readOnly 옵션을 true로 지정 -> 상자 크기 조절 가능한 resize activated -> 이를 막아줌 */
 }
 
 .my-design-img {

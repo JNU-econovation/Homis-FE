@@ -22,14 +22,15 @@ import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
 export default function App() {
   return (
     <BrowserRouter>
-        {/* <Routes>
+        <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/main' element={<MainPage />} />
           <Route path='/design' element={<DesignPage />} />
           <Route path='/save-detail' element={<SaveDetailPage />} />
-        </Routes> */}
+          <Route path='/my-design-detail' element={<MyDesignDetail />} />
+        </Routes>
 
        {/* <ColorBtn /> */}
         {/* <MainPage /> */}
@@ -49,7 +50,7 @@ export default function App() {
         {/* <SaveDetailPage /> */}
         {/* <LoadingModal text='창작한 도안 저장 중'/> */}
         {/* <DownloadBtn /> */}
-        <MyDesignDetail />
+        {/* <MyDesignDetail /> */}
     </BrowserRouter>
   );
 }

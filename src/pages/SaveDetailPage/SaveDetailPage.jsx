@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import BackBtn from '../../components/Button/BackBtn/BackBtn.jsx';
-import { getAccessToken, SaveDesignAPI } from '../../utils/API.jsx';
+import { getAccessToken, handleAuthError, SaveDesignAPI } from '../../utils/API.jsx';
 import LoadingModal from '../../components/Modals/LoadingModal/LoadingModal.jsx';
 
 export default function SaveDetailPage() {
@@ -35,13 +35,9 @@ export default function SaveDetailPage() {
             return;
         }
 
-        const accessToken = getAccessToken();
-        if (!accessToken) {
-            console.log('no access token');
-            alert('로그인 후 이용 가능합니다.');
-            navigate('/login');
-            return;
-        }
+        let accessToken;
+        try { accessToken = getAccessToken(); }
+        catch (error) { handleAuthError(error, navigate); return; }
 
         const requestBody = {
             madeName: title,
