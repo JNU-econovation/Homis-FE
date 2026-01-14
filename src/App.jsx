@@ -18,11 +18,13 @@ import SaveDetailPage from './pages/SaveDetailPage/SaveDetailPage.jsx';
 import LoadingModal from './components/Modals/LoadingModal/LoadingModal.jsx';
 import DownloadBtn from './components/Button/DownloadBtn/DownloadBtn.jsx';
 import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
+import ProductSpecTable from './components/Table/ProductSpecTable.jsx';
+import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage.jsx';
 
 export default function App() {
   return (
     <BrowserRouter>
-        <Routes>
+        {/* <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
@@ -30,7 +32,7 @@ export default function App() {
           <Route path='/design' element={<DesignPage />} />
           <Route path='/save-detail' element={<SaveDetailPage />} />
           <Route path='/my-design-detail' element={<MyDesignDetail />} />
-        </Routes>
+        </Routes> */}
 
        {/* <ColorBtn /> */}
         {/* <MainPage /> */}
@@ -51,6 +53,8 @@ export default function App() {
         {/* <LoadingModal text='창작한 도안 저장 중'/> */}
         {/* <DownloadBtn /> */}
         {/* <MyDesignDetail /> */}
+        {/* <ProductSpecTable /> */}
+        <ProductDetailPage />
     </BrowserRouter>
   );
 }
