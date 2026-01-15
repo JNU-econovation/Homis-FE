@@ -336,8 +336,97 @@ export async function downloadDesignIMadeAPI(requestHeader, requestBody) {
         }
         else {
             alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
-
         }
     }
     throw error;
+}
+
+export async function addItemAPI(inputs, subImages, navigate) {
+    let accessToken;
+    try { accessToken = getAccessToken(); }
+    catch (error) { handleAuthError(error, navigate); return; }
+
+    const requestHeader = {
+        'Authorization': `Bearer ${accessToken}`,
+    };
+
+    /* requestBody => FormData obj 안에, 순서대로! */
+    const formData = new FormData();
+
+    formData.append('saleThumbnailImgFile', inputs.mainImg);
+
+    subImages.map((item) => formData.append('saleExtraImgFiles', item.file));
+
+    formData.append('salePdfFile', inputs.registeredFile);
+
+    const requiredElements = {
+        saleName: inputs.itemName,
+        saleType: inputs.itemType,
+        usedNeedle: inputs.usedNeedle,
+        saleSize: inputs.size,
+        saleGauge: inputs.gauge,
+        yarnUsage: inputs.threadUsage,
+        saleScript: inputs.description,
+        salePrice: 0,
+    };
+    const jsonBlob = new Blob([JSON.stringify(requiredElements)], {
+        type: 'application/json',
+    }); // json data를 blob으로 싸서, content-type 명시하고,
+    formData.append('saleUploadReq', jsonBlob); // formData 객체에 저장
+
+    try {
+        const response = await axios.post(`${BASE_URL}/sale/upload`, formData, {
+            headers: requestHeader,
+        });
+        const res = response.data;
+        if (res.success) return true;
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '003_FAILED_CONVERT_TO_DB':
+                    alert('DB에 저장 중 convert 오류 (JSON 데이터 처리 오류)');
+                    break;
+                case '004_FAILED_CONVERT_TO_ENTITY':
+                    alert('DB에서 조회 중 convert 오류 (JSON 데이터 처리 오류)');
+                    break;
+                case '005_TOO_MANY_IMGS':
+                    alert('판매 등록 시 사용 가능 여분 이미지는 최대 3개입니다.');
+                    break;
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '005_BLOB_FAILED_UPLOAD_FILE':
+                    alert('Blob Storage에 파일 업로드 실패');
+                    break;
+                case '006_UNKNOWN_FAILED_UPLOAD_FILE':
+                    alert('알 수 없는 파일 업로드 오류');
+                    break;
+                default:
+                    alert(errorCode);
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
 }

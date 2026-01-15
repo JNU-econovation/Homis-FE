@@ -13,6 +13,7 @@ import { handleChangeForAddItem, handleClickAddItem } from '../../utils/validato
 import arrow_right_white from '../../assets/icons/arrow/arrow_right_white.png';
 
 const data = {
+    mainImg: '',
     itemName: '',
     itemType: '',
     usedNeedle: '',
@@ -21,7 +22,7 @@ const data = {
     threadUsage: '',
     description: '',
     registeredFile: '',
-    price: '',
+    // price: '',
 };
 
 // Dropdown Options
@@ -41,51 +42,56 @@ const dropdownOptions = [
 //     ];
 
 export default function AddItemPage() {
-    const [images, setImages] = useState([]);
+    const [mainImg, setMainImg] = useState(null);
+    const [subImages, setSubImages] = useState([]);
     const [inputs, setInputs] = useState(data);
     const [errors, setErrors] = useState(data);
-        
+
     const navigate = useNavigate();
 
     function handleImageSelect(file) {
-        if (images.length >= 4) return; /* 이미지는 4개까지만 등록 */
+        if (subImages.length >= 3) return; /* 이미지는 3개까지만 등록 */
 
         const newImage = {
             file: file, /* 서버로 보낼 진짜 파일 */
-            previewUrl: URL.createObjectURL(file), /* 화면에 띄울 가짜 URL */
+            previewUrl: URL.createObjectURL(file), /* 화면에 띄울 이미지url 생성 */
         };
-        setImages([...images, newImage]);
-    }
-
-    function handleSubmit() {
-        // VALIDATE INPUTS
-        // API CALL(POST: TITLE, PRICE, etc..)
-        return;
+        setSubImages([...subImages, newImage]);
     }
 
     function handleImageDelete(deleteIdx) {
-        setImages(images.filter((_, index) => index !== deleteIdx));
+        setSubImages(subImages.filter((_, index) => index !== deleteIdx));
     };
 
     function onChange(e) { handleChangeForAddItem(e, inputs, setInputs, errors); }
     function onChangeDescription(e) { handleChangeForAddItem(e, inputs, setInputs, errors, setErrors); }
-    function onClick() {
-        handleClickAddItem(inputs, errors, setErrors);
+    function onClick() {///////////////////////////////////////////////////////////
+        handleClickAddItem(inputs, subImages, errors, setErrors, navigate);
         // navigate('/mypage'); // 마이페이지 상세페이지?로 이동 (등록하기 버튼 누르면)
     }
 
     /* Dropdown */
     function handleOptionSelect(selectedOption) {
         setInputs({ ...inputs, itemType: selectedOption });
-        const newErrors = {...errors, itemType: ''};
+        const newErrors = { ...errors, itemType: '' };
         setErrors(newErrors);
     }
 
     /* UploadBtn */
     function handleFileSelect(file) {
-        setInputs({ ...inputs, registeredFile: file});
-        const newErrors = {...errors, registeredFile: ''};
+        setInputs({ ...inputs, registeredFile: file });
+        const newErrors = { ...errors, registeredFile: '' };
         setErrors(newErrors);
+    }
+
+    /* 대표 이미지 핸들러 */
+    function handleMainImageSelect(file) {
+        const newImage = {
+            file: file,
+            previewUrl: URL.createObjectURL(file)
+        };
+        setMainImg(newImage);
+        setInputs({ ...inputs, mainImg: file });
     }
 
     return (
@@ -98,19 +104,41 @@ export default function AddItemPage() {
             </div>
             <div className='add-item-page-body'>
                 <div className='upload-img-con'>
-                    <span className='upload-img-title'>이미지 등록 {'(PNG, JPG)'}</span>
-                    <div className='boxes-container'>
-                        { /* 업로드 버튼은 image가 4개 미만일 때만 출력 */}
-                        {images.length < 4 && (
-                            <ImageUploadBox onImageSelect={handleImageSelect} />
-                        )}
-                        {images.map((image, index) => ( /* 배열에 있는 요소 개수만큼 .map() */
+                    <div className='upload-main-img-container'> { /* 메인 이미지 등록 컨테이너 */}
+                        <span className={`upload-img-title main ${errors.mainImg ? 'error-case' : ''}`}>
+                            {errors.mainImg &&
+                                <span className='add-star'>*</span>
+                            }
+                            대표 이미지 {'(PNG, JPG)'}
+                        </span>
+                        { /* 대표 이미지는 1개만 허용 -> 업로드 버튼은 mainImg 사이즈가 0일 때만 띄움 */}
+                        {!mainImg ?
+                            <ImageUploadBox onImageSelect={handleMainImageSelect} />
+                            :
                             <ImagePreviewBox
-                                key={index}
-                                src={image.previewUrl}
-                                onClick={() => handleImageDelete(index)} /* 삭제 버튼에 대한 이벤트 핸들러 */
+                                src={mainImg.previewUrl}
+                                onClick={() => {
+                                    setMainImg(null);
+                                    setInputs({ ...inputs, mainImg: '' });
+                                }}
                             />
-                        ))}
+                        }
+                    </div>
+                    <div className='upload-sub-img-container'> { /* 서브 이미지 등록 컨테이너 */}
+                        <span className='upload-img-title sub'>이미지 등록 {'(PNG, JPG)'}</span>
+                        <div className='boxes-container'>
+                            { /* 업로드 버튼은 image가 3개 미만일 때만 출력 */}
+                            {subImages.length < 3 && (
+                                <ImageUploadBox onImageSelect={handleImageSelect} />
+                            )}
+                            {subImages.map((image, index) => ( /* 배열에 있는 요소 개수만큼 .map() */
+                                <ImagePreviewBox
+                                    key={index}
+                                    src={image.previewUrl}
+                                    onClick={() => handleImageDelete(index)} /* 삭제 버튼에 대한 이벤트 핸들러 */
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div className='add-item-page-input-con'>
@@ -198,9 +226,9 @@ export default function AddItemPage() {
                             name='price'
                             label='가격 설정'
                             placeholder='가격을 입력해주세요.'
-                            value={inputs.price}
+                            value={0} // value={inputs.price}
                             onChange={onChange}
-                            errorMessage={errors.price}
+                            // errorMessage={errors.price} // 0원으로 고정 -> 에러 뜰 일 없으니 에러 메시지 전달 X
                             width='15vw'
                         />
                         <span className='currency'>원</span>

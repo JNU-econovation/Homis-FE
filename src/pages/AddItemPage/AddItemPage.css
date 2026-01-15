@@ -61,17 +61,6 @@
     letter-spacing: -0.01em;
 }
 
-.boxes-container {
-    margin-top: 5px;
-    display: flex;
-    flex-direction: row;
-    gap: 23px;
-}
-
-.upload-img-con {
-    margin-bottom: 30px;
-}
-
 .description-container {
     position: relative;
 }
@@ -133,4 +122,33 @@
     line-height:  1em;
     letter-spacing: -0.01em;
     color: #000000;
+}
+
+.upload-img-title.error-case {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    color: #000000;
+}
+
+.upload-main-img-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+.upload-sub-img-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+.boxes-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }

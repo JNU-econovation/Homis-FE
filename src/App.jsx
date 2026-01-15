@@ -22,7 +22,7 @@ import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
 export default function App() {
   return (
     <BrowserRouter>
-        <Routes>
+        {/* <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
@@ -30,7 +30,7 @@ export default function App() {
           <Route path='/design' element={<DesignPage />} />
           <Route path='/save-detail' element={<SaveDetailPage />} />
           <Route path='/my-design-detail' element={<MyDesignDetail />} />
-        </Routes>
+        </Routes> */}
 
        {/* <ColorBtn /> */}
         {/* <MainPage /> */}
@@ -40,7 +40,7 @@ export default function App() {
         {/* <DesignSettingModal /> */}
         {/* <ImageUploadBox /> */}
         {/* <ImagePreviewBox /> */}
-        {/* <AddItemPage /> */}
+        <AddItemPage />
         {/* <Dropdown 
           options={['코바늘', '대바늘', '코바늘&대바늘', '아프간']}
         /> */}
