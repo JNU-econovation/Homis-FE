@@ -13,7 +13,7 @@ export default function UploadBtn({ label, error, onFileSelect, selectedFile }) 
     function handleFileChange(e) {
         const file = e.target.files[0];
         if (file) {
-            onFileSelect(file); // 부모에게 파일 전달
+            onFileSelect(file); // 부모에게 파일 전달 -> 부모 컴포넌트(AddItemPage)에서 관리 중인 inputs State의 registeredFile의 value에 선택된 파일 저장
         }
     }
 
@@ -30,7 +30,6 @@ export default function UploadBtn({ label, error, onFileSelect, selectedFile }) 
                     <img className='upload-img'
                         src={upload_icon} alt='업로드 이미지'
                     />
-
                 </div>
                 {selectedFile ?
                     <span className='file-name'>{selectedFile.name}</span>

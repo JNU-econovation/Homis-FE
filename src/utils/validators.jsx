@@ -1,4 +1,4 @@
-import { signUpAPI, LogInAPI } from './API.jsx';
+import { signUpAPI, LogInAPI, addItemAPI } from './API.jsx';
 
 export function validateInputs(input) {
     const newErrors = { nickname: '', id: '', pw: '', pwConfirm: '' };
@@ -45,6 +45,7 @@ export function validateAddItemDescription(input, errors) {
 
 export function validateInputsForAddItem(input, errors) {
     const newErrors = {
+        mainImg: '',
         itemName: '',
         itemType: '',
         usedNeedle: '',
@@ -59,9 +60,23 @@ export function validateInputsForAddItem(input, errors) {
 
     /* Object.entries() => object -> array로 변환 */
     Object.entries(input).forEach(([key, value]) => {
-        if (value.length <= 0)
+        if (value.length <= 0) 
             newErrors[key] = '*값을 입력해 주세요.';
     });
+    /*
+    if (value.length <= 0) => input 객체 안에는 String 요소만 있어야 함 -> .length 속성 없는 요소도 존재? -> 해당 요소들의 .length 접근 -> error
+    아무런 값도 입력되지 않았다면, inputs를 초기화한 대로 ''일 것
+    ''.length => 0 반환 -> 아무런 값도 입력되지 않았음을 의미하므로, error를 입력
+    이 로직은 inputs에 String 값만 존재할 때만 동작할 수 있음.
+    null값 등을 넣는다면, null.length 구조가 되어 런타임 중 뻗음. !! null값 안 들어가는 것을 보장해야 함!
+
+    length 필드가 존재할 때만 검사하도록 조건 추가
+    length field가 없는 요소라면, short circuit rule에 의해 value.length <= 0는 수행하지도 않음 -> 틀린 해석. inputs의 초기 상태('')가 보장되는 이상, 불필요한 조건
+    대표 이미지를 지울 때 inputs.mainImg를 null로 초기화해서 발생했던 문제였고, inputs.mainImg=''가 보장되는 지금으로썬 문제될 게 없음.
+    */
+
+    if (!input.mainImg)
+        newErrors.mainImg = '대표 이미지 등록 안 됨';
 
     if (input.itemName.length > 16)
         newErrors.itemName = '*상품명을 16자 이내로 입력해주세요.';
@@ -137,15 +152,18 @@ export function handleChangeForAddItem(e, inputs, setInputs, errors, setErrors =
     }
 }
 
-export function handleClickAddItem(inputs, errors, setErrors) {
+export async function handleClickAddItem(inputs, subImages, errors, setErrors, navigate) {
     const errorValidation = validateInputsForAddItem(inputs, errors);
     setErrors(errorValidation);
 
-    const hasError = Object.values(errors).some(value => value !== ''); // 빈 문자열 아닌 것이 하나라도 있다면 true 반환. 즉, 에러가 있다는 의미
+    const hasError = Object.values(errorValidation).some(value => value !== ''); // 빈 문자열 아닌 것이 하나라도 있다면 true 반환. 즉, 에러가 있다는 의미
     if (!hasError) {
-        // REGISTER ITEM ACI CALL
+        const apiRes = await addItemAPI(inputs, subImages, navigate);
+        if (apiRes) alert('판매 등록 완료');
+        else alert('판매 등록 실패. 다시 시도해 주세요.');
         return;
     }
+    console.log('api 호출안됨');
 }
 
 export async function validateLogIn(inputs, setError) {
