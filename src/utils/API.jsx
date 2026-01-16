@@ -178,9 +178,14 @@ export function handleAuthError(error, navigate) {
     else console.log(error); // 예기치 못한 에러
 }
 
-export async function designIMadeAPI(requestHeader) {
+export async function getDesignsForMainPageAPI(requestHeader, currentTab) {
+    let API_PATH;
+    if (currentTab === 'created') API_PATH = '/design-make/preview'; /* [메인] 내가 만든 도안 미리보기 불러오기 .madeName */
+    else if (currentTab === 'all') API_PATH = '/main/load'; /* [메인] 내 도안 페이지 구성 불러오기 (구매 + 제작) .title .original_uploader_nickname */
+    else if (currentTab === 'purchased') API_PATH = '/purchase/preview'; /* [메인] 구매한 도안 미리보기 불러오기 .saleName .salerNickname*/
+    
     try {
-        const response = await axios.get(`${BASE_URL}/design-make/preview`, {
+        const response = await axios.get(`${BASE_URL}${API_PATH}`, {
             headers: requestHeader
         });
         const res = response.data;
@@ -208,6 +213,9 @@ export async function designIMadeAPI(requestHeader) {
                 case '103_EXPIRED_ACCESS':
                     alert('액세스토큰이 만료되었습니다. 재발급 필요');
                     break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
                 default:
                     alert('500 Internal Server Error');
                     break;
@@ -222,22 +230,24 @@ export async function designIMadeAPI(requestHeader) {
     }
 }
 
-export async function getDesignIMadeDetailAPI(requestHeader, requestBody) {
+export async function getDesignDetailsForMainPageAPI(requestHeader, requestBody, type) {
+    let API_PATH;
+    if (type === 'MADE') API_PATH = '/design-make/detail';
+    else if (type === 'PURCHASE') API_PATH = '/sale/detail';
+
     try {
-        const response = await axios.get(`${BASE_URL}/design-make/detail`, {
+        const response = await axios.get(`${BASE_URL}${API_PATH}`, {
             params: requestBody,
             headers: requestHeader
         });
         const res = response.data;
 
-        if (res.success) {
-            return res.data; /* res.data => { madeDataId: ..., madeImgUrl: ..., .... } */
-        }
+        if (res.success) return res.data;
         return false;
     }
     catch (error) {
         if (error.response && error.response.data) {
-            const errRes = error.response.data; /* errRes => 객체 전체임. code: '...', ...: '...', */
+            const errRes = error.response.data;
             const errorCode = errRes.code;
 
             switch (errorCode) {
@@ -259,8 +269,17 @@ export async function getDesignIMadeDetailAPI(requestHeader, requestBody) {
                 case '300_NOT_OWNER':
                     alert('게시글 작성자가 아닙니다.');
                     break;
+                case '301_DELETED_SALE_NOT_OWNER':
+                    alert('삭제된 판매 게시글에 대해 구매자만 접근 가능');
+                    break;
                 case '400_NOT_FOUND_MADE':
                     alert('존재하지 않는 도안 제작 게시글에 대한 접근');
+                    break;
+                case '400':
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+                case '402_NOT_FOUND_SALE':
+                    alert('존재하지 않는 판매 도안 게시글에 대한 접근');
                     break;
                 default:
                     alert(JSON.stringify(errRes, null, 2));
@@ -268,16 +287,15 @@ export async function getDesignIMadeDetailAPI(requestHeader, requestBody) {
             }
             return false;
         }
-        else {
-            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
-            return false;
-        }
     }
 }
 
-export async function downloadDesignIMadeAPI(requestHeader, requestBody) {
+export async function fileDownloadStreamAPI(requestHeader, requestBody, isShopping) {
+    let API_PATH;
+    if (isShopping) API_PATH = 'purchase';
+    else API_PATH = 'design-make';
     try {
-        const response = await axios.post(`${BASE_URL}/design-make/download`, requestBody, {
+        const response = await axios.post(`${BASE_URL}/${API_PATH}/download`, requestBody, {
             headers: requestHeader,
             responseType: 'blob',
         });

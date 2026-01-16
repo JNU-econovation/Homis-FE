@@ -18,11 +18,14 @@ import SaveDetailPage from './pages/SaveDetailPage/SaveDetailPage.jsx';
 import LoadingModal from './components/Modals/LoadingModal/LoadingModal.jsx';
 import DownloadBtn from './components/Button/DownloadBtn/DownloadBtn.jsx';
 import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
+import SingleDownloadBtn from './components/Button/DownloadBtn/SingleDownloadBtn.jsx';
+import PurchasedDesignDetailPage from './pages/PurchasedDesignDetailPage/PurchasedDesignDetailPage.jsx';
+import ImagePagination from './components/ImagePagination/ImagePagination.jsx';
 
 export default function App() {
   return (
     <BrowserRouter>
-        {/* <Routes>
+        <Routes>
           <Route path='/' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
@@ -30,7 +33,8 @@ export default function App() {
           <Route path='/design' element={<DesignPage />} />
           <Route path='/save-detail' element={<SaveDetailPage />} />
           <Route path='/my-design-detail' element={<MyDesignDetail />} />
-        </Routes> */}
+          <Route path='/purchased-design-detail' element={<PurchasedDesignDetailPage />} />
+        </Routes>
 
        {/* <ColorBtn /> */}
         {/* <MainPage /> */}
@@ -40,7 +44,7 @@ export default function App() {
         {/* <DesignSettingModal /> */}
         {/* <ImageUploadBox /> */}
         {/* <ImagePreviewBox /> */}
-        <AddItemPage />
+        {/* <AddItemPage /> */}
         {/* <Dropdown 
           options={['코바늘', '대바늘', '코바늘&대바늘', '아프간']}
         /> */}
@@ -51,6 +55,9 @@ export default function App() {
         {/* <LoadingModal text='창작한 도안 저장 중'/> */}
         {/* <DownloadBtn /> */}
         {/* <MyDesignDetail /> */}
+        {/* <SingleDownloadBtn /> */}
+        {/* <PurchasedDesignDetailPage /> */}
+        {/* <ImagePagination /> */}
     </BrowserRouter>
   );
 }

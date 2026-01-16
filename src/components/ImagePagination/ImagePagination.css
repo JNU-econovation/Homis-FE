@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.image-pagination-container {
+    width: 75px;
+    height: 23px;
+    border-radius: 33px;
+    background: #12121273;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 3px;
+    gap: 7px;
+}
+
+.img-pagination-btn {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.pagination-btn-img {
+    width: 13.75px;
+    height: 13.75px;
+}
+
+.page-count {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1em;
+    letter-spacing: 0em;
+    color: #ffffff;
+}
+
+.img-pagination-btn.left:disabled .pagination-btn-img.left { /* 왼쪽 버튼 disabled 되면 left 이미지 불투명도 50 */
+    opacity: 0.5;
+}
+
+.img-pagination-btn.right:disabled .pagination-btn-img.right {
+    opacity: 0.5;
+}

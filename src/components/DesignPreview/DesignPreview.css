@@ -1,0 +1,107 @@
+.container-for-design-img {
+    width: 257.21px;
+    height: 319.91px;
+    border-radius: 10px;
+}
+
+.container-for-design-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.design-preview-img {
+    width: 207px;
+    height: 207px;
+    box-shadow: 0px 0px 35.9px 0px #0000003B;
+}
+
+.design-preview-img.purchase {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #0000003B; /* 하얀색 배경의 이미지 업로드 -> 테두리가 없어서 구분이 안 돼서 그림자로 테두리 생성 */
+}
+
+.container-for-overlayer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+
+    gap: 5px;
+
+    width: 100%;
+    height: 100%;
+    padding: 265px 0px 20px 20px;
+    box-sizing: border-box;
+
+    opacity: 0;
+    animation: fadeInOut 2.7s ease-in-out forwards;
+}
+
+.container-for-overlayer.active {
+    background: linear-gradient(180deg,
+            rgba(18, 18, 18, 0.5) 0%,
+            rgba(18, 18, 18, 0) 25%, 
+            rgba(18, 18, 18, 0) 75%,
+            rgba(18, 18, 18, 0.5) 100%
+        );
+    border-radius: 10px; /* 그라데이션 동그랗게 */
+}
+
+
+.design-preview-title {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    color: #fefefe;
+
+}
+
+.design-preview-editor {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1em;
+    letter-spacing: 0.02em;
+
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 8%;
+    text-decoration-thickness: 15%;
+    text-decoration-skip-ink: auto;
+
+    color: #fefefe;
+}
+
+/*
+isActive가 바뀌면 container-for-overlay(그라데이션 입힌 애)는 그에 맞게 600ms동안 불투명도 0<->1로 변경되게 하면 되지만,
+overlay 문구들(span)은 isActive가 false가 되면 DOM에서 바로 삭제해버림. 그래서, transition 적용할 틈이 없음.
+=> keyframes 써서 리액트가 컴포넌트를 특정 시간동안 살려두는 동안 알아서 쇼를 다 보여주고 자연스럽게 끝낼 수 있음
+*/
+/*
+fade-in = 600/2700 => 0.2222...
+유지 = (1500+600)/2700 => 0.777....
+*/
+@keyframes fadeInOut {
+    0% { /* 0~600ms 구간 */
+        opacity: 0;
+    }
+    22% { /* 600ms 지점 */
+        opacity: 1;
+    }
+
+    78% { /* 22% 지점부터 1500ms 유지 */
+        opacity: 1;
+    }
+
+    100% { /* 1500ms동안 다 보여줬으니 600ms동안 fadeout */
+        opacity: 0;
+    }
+}

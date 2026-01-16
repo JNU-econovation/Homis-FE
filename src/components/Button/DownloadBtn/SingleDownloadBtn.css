@@ -1,0 +1,35 @@
+.single-download-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 37px;
+    background-color: #f2f2f2;
+    border: none;
+    box-shadow: 0px 1px 4px 0px #00000040;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.1s;
+}
+
+.single-download-btn:active { /* 버튼 눌렸을 때 배경색 변경 */
+    background-color: #767676;
+}
+
+.single-download-btn-img {
+    height: 28px;
+    width: 28px;
+}
+
+.single-download-btn-img.pressed { /* 눌렸을 때의 이미지(하얀색)는 기본적으로 안 나오게 해야 함 */
+    display: none; 
+}
+
+.single-download-btn:active .single-download-btn-img.normal { /* 버튼 눌리면 기본 이미지(검정색)를 숨김 */
+    display: none;
+}
+
+.single-download-btn:active .single-download-btn-img.pressed { /* 반대로, 버튼 눌리면 하얀 이미지는 보이게 */
+    display: block;
+}

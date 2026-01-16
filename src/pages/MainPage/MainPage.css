@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* editbtn만 오른쪽으로 옮기기 위함 */
+    position: relative;
+    /* editbtn만 오른쪽으로 옮기기 위함 */
 
     width: 80%;
     margin: 0 auto;
@@ -31,7 +32,8 @@
 }
 
 .menubar-con {
-    position: fixed; /* 메뉴바는 항상 하단에 고정 */
+    position: fixed;
+    /* 메뉴바는 항상 하단에 고정 */
     bottom: 25px;
 
     /* 가운데로 */
@@ -49,7 +51,10 @@
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px 15px; /* grid-gap: (row) (col) */
+    grid-gap: 15px 15px;
+    /* grid-gap: (row) (col) */
+
+
 }
 
 @media (max-width: 1180px) {
@@ -69,7 +74,7 @@
 .design-img-con {
     width: 257.21px;
     height: 319.91px;
-    
+
     background-color: #d9d9d9;
     border-radius: 10px;
 }
@@ -77,7 +82,7 @@
 .main-page-img {
     width: 207px;
     height: 207px;
-    
+
     margin: 56.45px 25.11px;
     box-shadow: 0px 0px 35.9px 0px #0000003B;
 }

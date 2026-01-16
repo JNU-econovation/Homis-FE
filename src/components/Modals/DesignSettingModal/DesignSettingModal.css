@@ -11,6 +11,7 @@
     align-items: center;
 
     background-color: #121212B2;
+    z-index: 100; /* 제일 위로!! */
 }
 
 .design-modal-container {

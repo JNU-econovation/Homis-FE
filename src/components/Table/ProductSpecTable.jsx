@@ -33,7 +33,7 @@ export default function ProductSpecTable({ productSpecInfo }) {
                         {specList.map( (spec) => (
                             <tr className='spec-table-row' key={spec.key}>
                                 <th className='spec-table-header'>{spec.label}</th>
-                                <td className='spec-table-data'>{dummyData[spec.key]}</td>
+                                <td className='spec-table-data'>{productSpecInfo[spec.key]}</td>
                             </tr>
                         ))}
                     </tbody>

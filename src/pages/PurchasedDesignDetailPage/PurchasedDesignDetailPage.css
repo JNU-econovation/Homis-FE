@@ -1,0 +1,102 @@
+.purchased-detail-page-header {
+    margin-top: 10vh;
+    margin-left: -2vw;
+}
+
+.purchased-detail-page-body {
+    margin-top: 10vh;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: row;
+    gap: 35px;
+}
+
+.purchased-detail-page-left-elements-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.purchased-detail-page-title-and-editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.purchased-product-info {
+    font-family: 'Pretendard';
+}
+
+.purchased-product-info.title {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    vertical-align: bottom;
+}
+
+.purchased-product-info.editor {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    vertical-align: bottom;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 8%;
+    text-decoration-thickness: 15%;
+    text-decoration-skip-ink: auto;
+    color: #949494;
+}
+
+.purchased-product-img {
+    width: 376px;
+    height: 471px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.purchased-detail-page-right-elements-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 21px;
+}
+
+.purchased-detail-page-description {
+    width: 548px;
+    height: 240px;
+
+    border-radius: 10px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    border: none;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.4em;
+    color: #000000;
+}
+
+.purchased-detail-page-download-btn-container {
+    display: flex;
+    justify-content: right;
+    margin-top: 2vh;
+}
+
+.purchased-product-img-container {
+    display: flex;
+    flex-direction: column;
+
+    position: relative; /* img container를 기준점으로 */
+}
+
+.image-pagination-container-in-detail-page {
+    position: absolute;
+
+    bottom: 15px;
+    right: 12px;
+}
