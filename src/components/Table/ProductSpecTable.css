@@ -1,0 +1,59 @@
+/* .product-spec-table-page-container {
+    margin: 100px 100px;
+} */
+
+.spec-table-page-body {
+    margin-top: 1vh;
+}
+
+.spec-table {
+    border-top: 2px solid #505050;
+    border-bottom: 2px solid #505050;
+
+    width: 533px;
+    height: 173px;
+    border-collapse: collapse;
+}
+
+.spec-table-title {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.4em;
+    letter-spacing: -0.01em;
+    color: #000000;
+}
+
+.spec-table-header {
+    width: 108px;
+    height: (165.5 / 5)px;
+    text-align: left;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.4em;
+    letter-spacing: -0.01em;
+    color: #505050;
+
+    padding: 7.5px 15px;
+    box-sizing: border-box;
+
+    background-color: #f2f2f2;
+}
+
+.spec-table-data {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.4em;
+    letter-spacing: -0.01em;
+    color: #505050;
+
+    text-align: left;
+    padding-left: 15px;
+}
+
+.spec-table-row {
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
