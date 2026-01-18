@@ -3,6 +3,13 @@
     height: 319.91px;
     border-radius: 10px;
 }
+.container-for-design-img.long-pressed {
+    background: #767676B2;
+}
+
+.design-preview-container {
+    position: relative;
+}
 
 .container-for-design-img {
     display: flex;
@@ -17,6 +24,10 @@
     width: 207px;
     height: 207px;
     box-shadow: 0px 0px 35.9px 0px #0000003B;
+}
+
+.design-preview-img.long-pressed {
+    opacity: 0.7;
 }
 
 .design-preview-img.purchase {
@@ -104,4 +115,33 @@ fade-in = 600/2700 => 0.2222...
     100% { /* 1500ms동안 다 보여줬으니 600ms동안 fadeout */
         opacity: 0;
     }
+}
+
+.design-preview-cover {
+    /* 화면 전체 차지하도록 !! */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    opacity: 1;
+    z-index: 999; /* 투명막은 다른 요소들보다 무조건 위. 단, X 버튼보단 낮을 것 */
+}
+
+.container-for-x-img {
+    position: absolute;
+    z-index: 1000; /* 투명막보다 높게 해야 x가 터치됨 */
+    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.design-delete-img {
+    width: 48px;
+    height: 48px;
+    z-index: 1001; /* 실질적인 api 호출이 들어간 얘는 img니까, img container(1000)보다 더 위로 */
 }

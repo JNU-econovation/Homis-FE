@@ -1,5 +1,6 @@
 import './MyPage.css';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { getAccessToken, handleAuthError, getMyStorePreviewAPI } from '../../utils/API.jsx';
 import UserSettingModal from '../../components/Modals/UserSettingModal/UserSettingModal.jsx';
@@ -9,22 +10,34 @@ import MenuBar from '../../components/Bar/MenuBar/MenuBar.jsx';
 import UserProfile from '../../components/UserProfile/UserProfile.jsx';
 import ProductUploadBox from '../../components/Item/ProductUploadBox/ProductUploadBox.jsx';
 import UploadedProductPreview from '../../components/UploadedProductPreview/UploadedProductPreview.jsx';
+import BackBtn from '../../components/Button/BackBtn/BackBtn.jsx';
 
 export default function MyPage() {
+    const locate = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentData, setCurrentData] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
     const [deleteOpenedId, setDeleteOpenedId] = useState(null); /* 어느 상품에서 삭제하기 버튼이 열려 있는지 관리하기 위한 state */
 
+    const { isOwner = true, salerNickname = null } = locate.state || {};
+
     async function callAPI(requestHeader) {
-        const apiRes = await getMyStorePreviewAPI(requestHeader);
-        if (apiRes) setCurrentData(apiRes); //currentData.userStoreItems[i].saleThumbnailImgUrl | currentData.userProfile.userNickname ~
+        const apiRes = await getMyStorePreviewAPI(isOwner, requestHeader, salerNickname);
+        if (apiRes) setCurrentData(apiRes); // isOwner: currentData.userStoreItems[i].saleThumbnailImgUrl | currentData.userProfile.userNickname ~
         else {
             alert('요청에 실패하였습니다. 다시 시도해 주세요.');
             return;
         }
     }
+
+    /* isOwner에 따라 반환되는 데이터의 key값이 달라서 일반화시키기 위한 변수. currentData 변경 -> 매번 렌더링 -> 그에 따라 finalData 값도 초기화 됨 */
+    const finalData = currentData ? (
+        isOwner ? { items: currentData.userStoreItems, profile: currentData.userProfile, }
+            :
+            { items: currentData.salerStoreItems, profile: currentData.salerProfile, })
+        :
+        null;
 
     async function fetchData() { // UploadedProductPreview의 props로 전달해야 하니 useEffect 내부에서 정의X
         let accessToken;
@@ -40,7 +53,6 @@ export default function MyPage() {
 
     useEffect(function () {
         setIsLoading(true);
-
         fetchData();
     }, []); // dependency array 없어도 됨. 그냥 화면 초기에만 실행하면 되니까
 
@@ -52,7 +64,15 @@ export default function MyPage() {
                 />
             )}
             <div className='my-page-header'>
-                <div className='wheel-btn-container'>
+                {/* <div className='my-page-backbtn-container'>
+                    <BackBtn />
+                </div> */}
+                {!isOwner && // 타인 스토어일 때만 뒤로가기 버튼 있음 
+                    <div className='my-page-backbtn-container'>
+                        <BackBtn link='-1' />
+                    </div>
+                }
+                <div className={`wheel-btn-container ${!isOwner ? 'other-user' : ''}`}>
                     <WheelBtn
                         onClick={() => setIsModalOpen(true)}
                     />
@@ -76,13 +96,13 @@ export default function MyPage() {
                     <>
                         <div className='profile-and-nickname-wrapper'>
                             <UserProfile
-                                profileImg={currentData.userProfile.userProfileImgUrl}
-                                nickname={currentData.userProfile.userNickname}
+                                profileImg={finalData.profile.userProfileImgUrl}
+                                nickname={finalData.profile.userNickname}
                             />
                         </div>
                         <div className='product-preview-container'>
-                            <ProductUploadBox />
-                            {[...currentData.userStoreItems].reverse().map((item) =>
+                            {isOwner && <ProductUploadBox />}
+                            {[...finalData.items].reverse().map((item) =>
                                 <div key={item.salePostId} className={`upload-product-img-con ${deleteOpenedId === item.salePostId ? 'active' : ''}`}>
                                     <UploadedProductPreview
                                         product={item}
@@ -94,6 +114,7 @@ export default function MyPage() {
                                         }}
                                         isOpen={deleteOpenedId === item.salePostId} // true: 삭제하기 열려있음을 의미. 이걸 이용해서 자식 컴포넌트에서 삭제하기 버튼을 렌더링 함
                                         onDeleteSuccess={fetchData} // 삭제api 호출 성공?: 삭제한 디자인은 더 이상 띄우면 안 됨. -> fetchData 다시 수행해서, api 다시 호출하고 삭제 적용된 data를 가져와서 렌더링
+                                        isOwner={isOwner}
                                     />
                                 </div>
                             )}
@@ -101,11 +122,13 @@ export default function MyPage() {
                     </>
                 }
             </div>
-            <div className='my-page-footer'>
-                {!isModalOpen &&
-                    <MenuBar />
-                }
-            </div>
+            {isOwner &&
+                <div className='my-page-footer'>
+                    {!isModalOpen &&
+                        <MenuBar />
+                    }
+                </div>
+            }
         </div>
     );
 }

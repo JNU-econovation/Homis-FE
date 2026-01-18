@@ -38,30 +38,31 @@ export default function MainPage() {
         }
     }
 
+    async function fetchData() { // props로 넘겨주기 위해 useEffect에서 빼냄
+        let accessToken;
+        try { accessToken = getAccessToken(); }
+        catch (error) { handleAuthError(error, navigate); return; }
+        const requestHeader = {
+            'Authorization': `Bearer ${accessToken}`,
+        };
+
+        switch (currentTab) {
+            case 'all':
+            case 'created':
+            case 'purchased': {
+                await callAPI(requestHeader, currentTab);
+                break;
+            }
+        }
+        setIsLoading(false);
+    }
+
     useEffect(function () {
         // tab 변경 -> re-rendering -> api 응답 오기 전까지 currentData엔 이전 값이 들어가 있어서, 화면에 잠깐 보임
         // 이를 방지하기 위해 tab 바뀔 때마다 currentData를 초기화
         setIsLoading(true);
         setCurrentData([]);
 
-        async function fetchData() {
-            let accessToken;
-            try { accessToken = getAccessToken(); }
-            catch (error) { handleAuthError(error, navigate); return; }
-            const requestHeader = {
-                'Authorization': `Bearer ${accessToken}`,
-            };
-
-            switch (currentTab) {
-                case 'all':
-                case 'created':
-                case 'purchased': {
-                    await callAPI(requestHeader, currentTab);
-                    break;
-                }
-            }
-            setIsLoading(false);
-        }
         fetchData(); // 일반 함수 내에 async 함수를 정의하고, 일반 함수 내에서 async 함수(fetchData())를 실행함
     }, [currentTab]);
 
@@ -170,6 +171,7 @@ export default function MainPage() {
                                         type='MADE'
                                         designData={item}
                                         onDesignClick={() => handleDesignClick('MADE', item.madeDataId,)}
+                                        executeReRender={fetchData}
                                     />
                                 </div>
                             )
@@ -188,9 +190,10 @@ export default function MainPage() {
                                         type={item.type === 'MADE' ? 'MADE' : item.type === 'PURCHASE' ? 'PURCHASE' : ''}
                                         designData={item}
                                         onDesignClick={() => {
-                                        if (item.type === 'MADE') handleDesignClick(item.type, item.id); // MADE 타입이면 id 넘겨주면 됨
-                                        else if(item.type === 'PURCHASE') handleDesignClick(item.type, item.original_post_id, item.id);
-                                    }}
+                                            if (item.type === 'MADE') handleDesignClick(item.type, item.id); // MADE 타입이면 id 넘겨주면 됨
+                                            else if (item.type === 'PURCHASE') handleDesignClick(item.type, item.original_post_id, item.id);
+                                        }}
+                                        executeReRender={fetchData}
                                     />
                                 </div>
                             )
@@ -212,6 +215,7 @@ export default function MainPage() {
                                         type='PURCHASE'
                                         designData={item}
                                         onDesignClick={() => handleDesignClick('PURCHASE', item.salePostId, item.purchasedPostId)}
+                                        executeReRender={fetchData}
                                     />
                                 </div>
                             )

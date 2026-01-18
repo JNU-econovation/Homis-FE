@@ -1,5 +1,5 @@
 import './PurchasedDesignDetailPage.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import ProductSpecTable from '../../components/Table/ProductSpecTable.jsx';
@@ -9,6 +9,8 @@ import ImagePagination from '../../components/ImagePagination/ImagePagination.js
 
 export default function PurchasedDesignDetailPage() {
     const locate = useLocation();
+    const navigate = useNavigate();
+
     const { salePostDetailData, saleAndUserInfo, id } = locate.state || {};
     const specTableData = {
         type: salePostDetailData.saleType,
@@ -64,7 +66,14 @@ export default function PurchasedDesignDetailPage() {
                     </div>
                     <div className='purchased-detail-page-title-and-editor-wrapper'>
                         <span className='purchased-product-info title'>{salePostDetailData.saleName}</span>
-                        <span className='purchased-product-info editor'>edit.{salePostDetailData.salerNickname}</span>
+                        <span className='purchased-product-info editor'
+                            onClick={() => navigate('/my-page', {
+                                state: {
+                                    isOwner: false,
+                                    salerNickname: salePostDetailData.salerNickname,
+                                }
+                            })}
+                        >edit.{salePostDetailData.salerNickname}</span>
                     </div>
                 </div>
                 <div className='purchased-detail-page-right-elements-wrapper'>

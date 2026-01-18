@@ -449,11 +449,23 @@ export async function addItemAPI(inputs, subImages, navigate) {
     }
 }
 
-export async function getMyStorePreviewAPI(requestHeader) {
+export async function getMyStorePreviewAPI(isOwner, requestHeader, sellerNickname) {
+    let API_PATH;
+    if (isOwner) API_PATH = '/store/my-page';
+    else if (!isOwner) API_PATH = '/store/load';
     try {
-        const response = await axios.get(`${BASE_URL}/store/my-page`, {
-            headers: requestHeader
-        });
+        let response;
+        if (isOwner) {
+            response = await axios.get(`${BASE_URL}${API_PATH}`, {
+                headers: requestHeader
+            });
+        }
+        else if (!isOwner) {
+            response = await axios.get(`${BASE_URL}${API_PATH}`, {
+                headers: requestHeader,
+                params: { salerNickname: sellerNickname },
+            })
+        }
         const res = response.data;
 
         if (res.success) {
@@ -484,6 +496,9 @@ export async function getMyStorePreviewAPI(requestHeader) {
                     break;
                 case '105_NOT_FOUND_USER':
                     alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '404_NOT_FOUND_SALER':
+                    alert('존재하지 않는 판매자에 대한 접근');
                     break;
                 default:
                     alert('500 Internal Server Error');
@@ -535,7 +550,7 @@ export async function deleteUploadedProductAPI(requestHeader, requestBody) {
         }
         return false;
     }
-    catch(error) {
+    catch (error) {
         if (error.response && error.response.data) {
             const errRes = error.response.data;
             const errorCode = errRes.code;
@@ -571,7 +586,72 @@ export async function deleteUploadedProductAPI(requestHeader, requestBody) {
                 case '0018_UNKNOWN_FAILED_DELETE_FILE':
                     alert('알 수 없는 FILE 삭제 오류 발생');
                     break;
-                default: 
+                default:
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function deleteDesignsAPI(type, requestHeader, params) {
+    let API_PATH;
+    if (type === 'MADE') API_PATH = '/design-make/delete';
+    else if (type === 'PURCHASE') API_PATH = '/purchase/delete';
+    try {
+        const response = await axios.delete(`${BASE_URL}${API_PATH}`, {
+            headers: requestHeader,
+            params: params,
+        });
+        const res = response.data;
+
+        if (res.success) {
+            return true;
+        }
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '300_NOT_OWNER':
+                    alert('게시글 작성자가 아닙니다.');
+                    break;
+                case '402_NOT_FOUND_SALE':
+                    alert('존재하지 않는 판매 도안 게시글에 대한 접근');
+                    break;
+                case '403_NOT_FOUND_PURCHASED':
+                    alert('존재하지 않는 구매 이력 삭제 시도');
+                    break;
+                case '0017_BLOB_FAILED_DELETE':
+                    alert('BLOB 삭제 중 오류 발생');
+                    break;
+                case '0018_UNKNOWN_FAILED_DELETE_FILE':
+                    alert('알 수 없는 FILE 삭제 오류 발생');
+                    break;
+                default:
                     alert(JSON.stringify(errRes, null, 2));
                     break;
             }

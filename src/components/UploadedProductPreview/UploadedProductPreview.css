@@ -13,6 +13,11 @@
     border-radius: 10px;
 }
 
+.three-dots-container.other-user { /* 타인이 스토어 방문한 경우, 삭제하기 못하게 */
+    opacity: 1;
+    visibility: hidden;
+}
+
 .three-dots-img {
     width: 26px;
     height: 26px;

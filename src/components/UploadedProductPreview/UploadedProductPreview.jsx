@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import three_dots_icon from '../../assets/icons/Setting/three_dots.png';
 import { getAccessToken, handleAuthError, deleteUploadedProductAPI } from '../../utils/API.jsx';
 
-export default function UploadedProductPreview({ product, isOpen, onThreeDotsClick, onDeleteSuccess }) {
+export default function UploadedProductPreview({ product, isOpen, onThreeDotsClick, onDeleteSuccess, isOwner }) {
     const navigate = useNavigate();
 
     async function handleClickDelete(event) {
@@ -37,10 +37,10 @@ export default function UploadedProductPreview({ product, isOpen, onThreeDotsCli
     return (
         <div className='uploaded-product-preview' onClick={() => // 사진 누르면 상세페이지로 넘어가는 핸들러
             navigate('/uploaded-product-detail', {
-                state: { salePostId: product.salePostId }
+                state: { salePostId: product.salePostId, isOwner: isOwner }
             }
             )}>
-            <div className='three-dots-container'>
+            <div className={`three-dots-container ${!isOwner ? 'other-user':''}`}>
                 <button className='three-dots-btn' onClick={onThreeDotsClick}>
                     <img className='three-dots-img'
                         src={three_dots_icon}

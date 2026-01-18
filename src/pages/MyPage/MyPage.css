@@ -9,6 +9,24 @@
 }
 
 .my-page-header {
+    position: absolute; /* body 안 밀어내게끔 absolute로.. 안 하면 스크롤 생김 */
+    width: 100%;
+    z-index: 20; /* 모달보다 낮게.. */
+}
+
+.my-page-backbtn-container {
+    position: absolute;
+    left: -4vw;
+    top: 8vh;
+}
+
+.wheel-btn-container {
+    position: absolute;
+    right: 3vw;
+    top: 4vh;
+}
+
+/* .my-page-header {
     display: flex;
     justify-content: right;
     
@@ -16,7 +34,7 @@
     right: 4.5vw;
     margin-top: 7.5vh;
     z-index: 20;
-}
+} */
 
 .my-page-body {
     height: 80vh;
@@ -73,4 +91,9 @@
     pointer-events: none; /* 사진 담는 박스가 투명막보다 높아지면, 해당 영역 클릭 시: 삭제하기 버튼 안 사라짐. 삭제하기 버튼이 있는 박스를 클릭해도 삭제하기 버튼이 사라질 수 있도록 해야.. 그래서, 이 옵션을 줘서 투명막보다 높은 걸 무효화 */
     /* 단, 삭제하기 버튼(UploadedProductPreview에 있음)은 투명막보다 높아야만 함. 그래야 삭제하기 버튼을 누를 수 있으니..
     이를 위해 UploadProductPreview에서 삭제하기 span에 pointer-events: auto를 줌. */
+}
+
+.wheel-btn-container.other-user {
+    opacity: 1;
+    visibility: hidden;
 }

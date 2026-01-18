@@ -27,7 +27,7 @@ export default function ProductDetailPage() {
     const locate = useLocation(); // mypage에서 도안 사진 클릭하면 해당 도안에 대한 data를 넘겨주면서 이 페이지로 이동될 거임. 그때 data 받기 위해 location 선언
     const [currentData, setCurrentData] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const { salePostId } = locate.state || {};
+    const { salePostId, isOwner } = locate.state || {};
 
     /* states for img pagination */
     const [images, setImages] = useState([]);
@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
     return (
         <div className='product-detail-page-container'>
             <div className='product-detail-page-header'>
-                <BackBtn link='/my-page' /> { /* 뒤로가기 버튼 => 일단은 main 페이지로. 아직 mypage X */}
+                <BackBtn link={isOwner ? '/my-page' : '-1'} /> { /* 뒤로가기 버튼 => 일단은 main 페이지로. 아직 mypage X */}
             </div>
             {!isLoading &&
                 <div className='product-detail-page-body'>
