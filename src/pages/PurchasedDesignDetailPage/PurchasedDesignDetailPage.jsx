@@ -34,7 +34,7 @@ export default function PurchasedDesignDetailPage() {
     });
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    /* ImagePagination Handlers */
+    /* ImagePagination Handlers*/
     const handlePrevClick = () => {
         if (currentIndex > 0) // idx > 0 => 첫 번째 사진이 아님
             setCurrentIndex(prev => prev - 1); // 기존 state값을 prev로 받아서 prev - 1 수행한 결과값으로 set..

@@ -65,9 +65,9 @@ export default function AddItemPage() {
 
     function onChange(e) { handleChangeForAddItem(e, inputs, setInputs, errors); }
     function onChangeDescription(e) { handleChangeForAddItem(e, inputs, setInputs, errors, setErrors); }
-    function onClick() {///////////////////////////////////////////////////////////
-        handleClickAddItem(inputs, subImages, errors, setErrors, navigate);
-        // navigate('/mypage'); // 마이페이지 상세페이지?로 이동 (등록하기 버튼 누르면)
+    async function onClick() {
+        const res = await handleClickAddItem(inputs, subImages, errors, setErrors, navigate); // handleClickAddItem에서 api 호출도 하고 결과도 넘어오니 await 써줘야.. 안 쓰면 페이지 이동이 먼저 수행됨
+        if (res) navigate('/my-page');
     }
 
     /* Dropdown */
@@ -98,7 +98,7 @@ export default function AddItemPage() {
         <div className='add-item-page-overlay'>
             <div className='add-item-page-header'>
                 <div className='add-item-page-back-btn'>
-                    <BackBtn className='add-item-page-back-btn' /> { /* <BackBtn link='/mypage' /> => mypage 구현 전 */}
+                    <BackBtn link='/my-page' className='add-item-page-back-btn' />
                 </div>
                 <h2 className='add-item-page-title'>도안 판매하기</h2>
             </div>

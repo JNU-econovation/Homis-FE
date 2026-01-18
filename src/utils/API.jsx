@@ -183,7 +183,7 @@ export async function getDesignsForMainPageAPI(requestHeader, currentTab) {
     if (currentTab === 'created') API_PATH = '/design-make/preview'; /* [메인] 내가 만든 도안 미리보기 불러오기 .madeName */
     else if (currentTab === 'all') API_PATH = '/main/load'; /* [메인] 내 도안 페이지 구성 불러오기 (구매 + 제작) .title .original_uploader_nickname */
     else if (currentTab === 'purchased') API_PATH = '/purchase/preview'; /* [메인] 구매한 도안 미리보기 불러오기 .saleName .salerNickname*/
-    
+
     try {
         const response = await axios.get(`${BASE_URL}${API_PATH}`, {
             headers: requestHeader
@@ -230,7 +230,7 @@ export async function getDesignsForMainPageAPI(requestHeader, currentTab) {
     }
 }
 
-export async function getDesignDetailsForMainPageAPI(requestHeader, requestBody, type) {
+export async function getDesignDetailsAPI(requestHeader, requestBody, type) {
     let API_PATH;
     if (type === 'MADE') API_PATH = '/design-make/detail';
     else if (type === 'PURCHASE') API_PATH = '/sale/detail';
@@ -438,6 +438,141 @@ export async function addItemAPI(inputs, subImages, navigate) {
                     break;
                 default:
                     alert(errorCode);
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function getMyStorePreviewAPI(requestHeader) {
+    try {
+        const response = await axios.get(`${BASE_URL}/store/my-page`, {
+            headers: requestHeader
+        });
+        const res = response.data;
+
+        if (res.success) {
+            return res.data;
+        }
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '400':
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                default:
+                    alert('500 Internal Server Error');
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function logoutAPI() {
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/logout`);
+        const res = response.data;
+        if (res.success) return true;
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            if (errorCode === '500') {
+                alert(JSON.stringify(errRes, null, 2));
+                return false;
+            }
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function deleteUploadedProductAPI(requestHeader, requestBody) {
+    try {
+        const response = await axios.delete(`${BASE_URL}/store/my-delete`, {
+            headers: requestHeader,
+            params: requestBody
+        });
+        const res = response.data;
+
+        if (res.success) {
+            return true;
+        }
+        return false;
+    }
+    catch(error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '300_NOT_OWNER':
+                    alert('게시글 작성자가 아닙니다.');
+                    break;
+                case '402_NOT_FOUND_SALE':
+                    alert('존재하지 않는 판매 도안 게시글에 대한 접근');
+                    break;
+                case '906_ALREADY_DELETED_SALE':
+                    alert('이미 삭제한 판매 게시글은 삭제 불필요');
+                    break;
+                case '0017_BLOB_FAILED_DELETE':
+                    alert('BLOB 삭제 중 오류 발생');
+                    break;
+                case '0018_UNKNOWN_FAILED_DELETE_FILE':
+                    alert('알 수 없는 FILE 삭제 오류 발생');
+                    break;
+                default: 
+                    alert(JSON.stringify(errRes, null, 2));
                     break;
             }
             return false;

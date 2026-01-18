@@ -1,0 +1,76 @@
+.my-page-container {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.my-page-header {
+    display: flex;
+    justify-content: right;
+    
+    position: absolute;
+    right: 4.5vw;
+    margin-top: 7.5vh;
+    z-index: 20;
+}
+
+.my-page-body {
+    height: 80vh;
+    width: 87%;
+    background-color: #f2f2f2;
+    margin-top: 20vh;
+    
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-and-nickname-wrapper {
+    margin-top: -40.5px; /* 이미지 높이(81px)의 절반만큼 위로 올림 */
+}
+
+.my-page-footer {
+    position: fixed;
+    bottom: 25px;
+}
+
+.product-preview-container {
+    margin-top: 5vh;
+
+    width: 100%;
+    padding: 0vw 5vw;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px 15px;
+    justify-items: center;
+
+    overflow-y: auto;
+}
+
+.my-page-cover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    opacity: 0; /* 완전히 투명하게 처리해서 화면 안 가리도록 */
+    z-index: 999; /* 제일 위로! */
+}
+
+.upload-product-img-con {
+    position: relative; /* z-index 유효하려면 relative여야.. */
+}
+
+.upload-product-img-con.active {
+    z-index: 1000; /* active일 때 => z-index를 투명막보다 더 높게 함. 투명막이 여기도 가려버리면, 삭제하기 버튼을 누를 수가 없으니까. active: 삭제하기 버튼이 올라온 경우 */
+    pointer-events: none; /* 사진 담는 박스가 투명막보다 높아지면, 해당 영역 클릭 시: 삭제하기 버튼 안 사라짐. 삭제하기 버튼이 있는 박스를 클릭해도 삭제하기 버튼이 사라질 수 있도록 해야.. 그래서, 이 옵션을 줘서 투명막보다 높은 걸 무효화 */
+    /* 단, 삭제하기 버튼(UploadedProductPreview에 있음)은 투명막보다 높아야만 함. 그래야 삭제하기 버튼을 누를 수 있으니..
+    이를 위해 UploadProductPreview에서 삭제하기 span에 pointer-events: auto를 줌. */
+}

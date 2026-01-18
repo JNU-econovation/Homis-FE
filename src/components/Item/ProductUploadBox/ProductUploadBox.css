@@ -1,0 +1,25 @@
+.product-upload-box {
+    background-color: #dddddd;
+    width: 280.15px;
+    height: 281.96px;
+    border-radius: 10px;
+    border: 2px solid #c1c1c3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-upload-img {
+    width: 16px;
+    height: 16px;
+}
+
+.product-upload-span {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    color: #676767;
+}

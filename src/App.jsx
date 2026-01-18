@@ -21,6 +21,11 @@ import MyDesignDetail from './pages/MyDesignDetail/MyDesignDetail.jsx';
 import SingleDownloadBtn from './components/Button/DownloadBtn/SingleDownloadBtn.jsx';
 import PurchasedDesignDetailPage from './pages/PurchasedDesignDetailPage/PurchasedDesignDetailPage.jsx';
 import ImagePagination from './components/ImagePagination/ImagePagination.jsx';
+import MyPage from './pages/MyPage/MyPage.jsx';
+import WheelBtn from './components/Button/WheelBtn/WheelBtn.jsx';
+import UserSettingModal from './components/Modals/UserSettingModal/UserSettingModal.jsx';
+import UserProfile from './components/UserProfile/UserProfile.jsx';
+import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage.jsx';
 
 export default function App() {
   return (
@@ -34,6 +39,9 @@ export default function App() {
           <Route path='/save-detail' element={<SaveDetailPage />} />
           <Route path='/my-design-detail' element={<MyDesignDetail />} />
           <Route path='/purchased-design-detail' element={<PurchasedDesignDetailPage />} />
+          <Route path='/add-item' element={<AddItemPage />} />
+          <Route path='/my-page' element={<MyPage />} />
+          <Route path='/uploaded-product-detail' element={<ProductDetailPage />} />
         </Routes>
 
        {/* <ColorBtn /> */}
@@ -58,6 +66,10 @@ export default function App() {
         {/* <SingleDownloadBtn /> */}
         {/* <PurchasedDesignDetailPage /> */}
         {/* <ImagePagination /> */}
+        {/* <MyPage /> */}
+        {/* <WheelBtn /> */}
+        {/* <UserSettingModal /> */}
+        {/* <UserProfile /> */}
     </BrowserRouter>
   );
 }

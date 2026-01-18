@@ -1,0 +1,163 @@
+.user-setting-modal-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    background-color: #121212B2;
+
+    opacity: 0; /* 평소엔 아예 안 보이게 불투명도 0 */
+    visibility: hidden; /* 클릭도 안 되게끔 */
+}
+/* 
+.overlay 전체에 불투명도 줘서 fade-in 구현 시: modal-container도 fade-in 되고, 그 이후에 modal-container에서 또 따로 slide-in 되기에 모달창이 두번 뜸.
+해결책: overlay에서 필요한 fade-in 효과는 background-color 뿐이니까, 이거에만 적용하면 된다.
+*/
+
+@keyframes slide-in {
+    from {
+        transform: translateY(100%); /* 처음엔 아래에 숨어있도록 */
+        opacity: 0; /* 안 보이게 */
+        visibility: hidden; /* 클릭 방지 */
+    }
+    to {
+        transform: translateY(0%); /* 제자리로 */
+        opacity: 1; /* 불투명도 1로 다 보이게 */
+        visibility: visible; /* 클릭 방지 X */
+    }
+}
+@keyframes slide-out { /* 앤 slide-in 반대로 하면 됨 */
+    from {
+        transform: translateY(0%);
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@keyframes fade-in {
+    from {
+        /* opacity: 0; 안 보이게 */
+        background-color: #12121200; /* 투명도 0 => 뒤에 00이 투명도 의미 */
+        visibility: hidden; /* 클릭 방지 */
+    }
+    to {
+        /* opacity: 1; 불투명도 1로 다 보이게 */
+        background-color: #121212B2;
+        visibility: visible; /* 클릭 방지 X */
+    }
+}
+@keyframes fade-out { /* 앤 slide-in 반대로 하면 됨 */
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.user-setting-modal-overlay.open {
+    opacity: 1; /* 모달창 열렸을 땐 불투명도 1 */
+    visibility: visible;
+}
+
+.user-setting-modal-container.slide-in {
+    animation: slide-in 300ms ease-in-out 300ms forwards; /* 두 번째에 쓴 300ms는 지연 시간. 저 시간만큼 기다렸다가 실행됨 */
+}
+
+.user-setting-modal-container.slide-out {
+    animation: slide-out 300ms ease-in-out forwards; /* 사라질 땐 투명 배경이랑 같이 사라지는 게 나으니 지연시간 X */
+}
+
+.user-setting-modal-overlay.fade-in {
+    animation: fade-in 300ms ease-in-out forwards;
+}
+
+.user-setting-modal-overlay.fade-out {
+    animation: fade-out 300ms ease-in-out forwards;
+}
+
+.user-setting-modal-container {
+    width: 375px;
+    height: 135px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background: #f2f2f2;
+    opacity: 0; /* 처음엔 안 보이게 했다가, 지연시간 이후에 slide-in */
+}
+
+.user-setting-modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.user-setting-modal-horizontal-bar {
+    width: 133px;
+    height: 4px;
+    background-color: #c1c1c3;
+    border-radius: 13px;
+
+    position: absolute;
+    top: 11px;
+}
+
+.user-setting-modal-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.logout-img {
+    width: 18px;
+    height: 18px;
+
+    position: absolute;
+    top: 43px;
+    left: 37px;
+}
+
+.logout-span {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+
+    position: absolute;
+    top: 44px;
+    left: 63px;
+}
+
+.logout-arrow-img-btn {
+    border: none;
+    background: none;
+}
+
+.logout-arrow-img {
+    width: 18px;
+    height: 18px;
+
+    position: absolute;
+    right: 36px;
+    top: 43px;
+}
+
+.logout-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

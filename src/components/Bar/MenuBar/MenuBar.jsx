@@ -32,7 +32,7 @@ export default function MenuBar() {
                 { ({isActive}) => renderIcon(isActive, iconHome_s, iconHome_uns, '홈') }
             </NavLink>
             { /* 마이페이지 */ }
-            <NavLink to='#' className='mypage'>
+            <NavLink to='/my-page' className='mypage'>
                 { ({isActive}) => renderIcon(isActive, iconMyPage_s, iconMyPage_uns, '마이페이지') }
             </NavLink>
         </nav>

@@ -3,7 +3,7 @@ import MenuBar from '../../components/Bar/MenuBar/MenuBar.jsx';
 import FilterBar from '../../components/Bar/FilterBar/FilterBar.jsx';
 import DesignSettingModal from '../../components/Modals/DesignSettingModal/DesignSettingModal.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getAccessToken, handleAuthError, getDesignsForMainPageAPI, getDesignDetailsForMainPageAPI } from '../../utils/API.jsx';
+import { getAccessToken, handleAuthError, getDesignsForMainPageAPI, getDesignDetailsAPI } from '../../utils/API.jsx';
 import './MainPage.css';
 import DesignPreview from '../../components/DesignPreview/DesignPreview.jsx';
 
@@ -77,7 +77,7 @@ export default function MainPage() {
         const requestBody = {
             madeDataId: dataId,
         };
-        const apiRes = await getDesignDetailsForMainPageAPI(requestHeader, requestBody, 'MADE'); // apiRes = { madeDataId: ..., ... }
+        const apiRes = await getDesignDetailsAPI(requestHeader, requestBody, 'MADE'); // apiRes = { madeDataId: ..., ... }
         if (apiRes) {
             navigate('/my-design-detail', {
                 state: {
@@ -108,7 +108,7 @@ export default function MainPage() {
             salePostId: salePostId,
         };
 
-        const apiRes = await getDesignDetailsForMainPageAPI(requestHeader, requestBody, 'PURCHASE');
+        const apiRes = await getDesignDetailsAPI(requestHeader, requestBody, 'PURCHASE');
         if (apiRes) {
             navigate('/purchased-design-detail', {
                 state: {

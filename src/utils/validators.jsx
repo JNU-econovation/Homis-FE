@@ -60,7 +60,7 @@ export function validateInputsForAddItem(input, errors) {
 
     /* Object.entries() => object -> array로 변환 */
     Object.entries(input).forEach(([key, value]) => {
-        if (value.length <= 0) 
+        if (value.length <= 0)
             newErrors[key] = '*값을 입력해 주세요.';
     });
     /*
@@ -159,11 +159,16 @@ export async function handleClickAddItem(inputs, subImages, errors, setErrors, n
     const hasError = Object.values(errorValidation).some(value => value !== ''); // 빈 문자열 아닌 것이 하나라도 있다면 true 반환. 즉, 에러가 있다는 의미
     if (!hasError) {
         const apiRes = await addItemAPI(inputs, subImages, navigate);
-        if (apiRes) alert('판매 등록 완료');
-        else alert('판매 등록 실패. 다시 시도해 주세요.');
-        return;
+        if (apiRes) {
+            alert('판매 등록 완료');
+            return true;
+        }
+        else {
+            alert('판매 등록 실패. 다시 시도해 주세요.');
+            return false;
+        }
     }
-    console.log('api 호출안됨');
+    // console.log('api 호출안됨');
 }
 
 export async function validateLogIn(inputs, setError) {
