@@ -26,6 +26,7 @@ import WheelBtn from './components/Button/WheelBtn/WheelBtn.jsx';
 import UserSettingModal from './components/Modals/UserSettingModal/UserSettingModal.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage.jsx';
+import ShoppingPage from './pages/ShoppingPage/ShoppingPage.jsx';
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
           <Route path='/add-item' element={<AddItemPage />} />
           <Route path='/my-page' element={<MyPage />} />
           <Route path='/uploaded-product-detail' element={<ProductDetailPage />} />
+          <Route path='/shopping-page' element={<ShoppingPage />} />
         </Routes>
 
        {/* <ColorBtn /> */}

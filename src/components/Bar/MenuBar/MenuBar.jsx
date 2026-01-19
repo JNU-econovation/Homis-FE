@@ -24,7 +24,7 @@ export default function MenuBar() {
     return (
         <nav className='menu-bar'>
             { /* 쇼핑 */ }
-            <NavLink to='#' className='shopping'>
+            <NavLink to='/shopping-page' className='shopping'>
                 { ({isActive}) => renderIcon(isActive, iconShopping_s, iconShopping_uns, '쇼핑') }
             </NavLink>
             { /* 홈 */ }

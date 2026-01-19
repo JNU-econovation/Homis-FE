@@ -449,6 +449,52 @@ export async function addItemAPI(inputs, subImages, navigate) {
     }
 }
 
+export async function getProductOnSalePreviewAPI(requestHeader) {
+    try {
+        const response = await axios.get(`${BASE_URL}/sale/shopping`, {
+            headers: requestHeader,
+        });
+        const res = response.data;
+        if (res.success) return res.data;
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '400':
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                default:
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
 export async function getMyStorePreviewAPI(isOwner, requestHeader, sellerNickname) {
     let API_PATH;
     if (isOwner) API_PATH = '/store/my-page';

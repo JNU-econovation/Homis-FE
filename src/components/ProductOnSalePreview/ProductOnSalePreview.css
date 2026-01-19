@@ -1,0 +1,66 @@
+.product-on-sale-preview-container {
+    width: 229px;
+    height: 339px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.product-on-sale-preview-img {
+    width: 229px;
+    height: 286.85px;
+    border-radius: 10px;
+}
+
+.product-on-sale-detail-info-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-on-sale-editor-and-price-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.product-on-sale-title {
+    width: 220px;
+    height: 23px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    color: #121212;
+}
+
+.product-on-sale-editor {
+    width: 108px;
+    height: 11px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 1em;
+    letter-spacing: -0.03em;
+
+    vertical-align: bottom;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 8%;
+    text-decoration-thickness: 15%;
+    text-decoration-skip-ink: auto;
+    color: #767676;
+}
+
+.product-on-sale-price {
+    width: 100px;
+    height: 20px;
+    text-align: right;
+    font-weight: 'Pretendard';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    color: #121212;
+}
