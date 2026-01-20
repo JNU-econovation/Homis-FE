@@ -74,21 +74,21 @@ export async function LogInAPI(payload, setError) {
     }
 }
 
-export async function SaveDesignAPI(requestBody, requestHeader, setUploadProgress) {
+export async function SaveDesignAPI(requestBody, requestHeader, setProgress) {
     try {
         const response = await axios.post(`${BASE_URL}/design-make/upload-v2`, requestBody, {
             headers: requestHeader,
             onUploadProgress: (progressEvent) => {
                 if (progressEvent.total) {
                     const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                    setUploadProgress(progress);
+                    setProgress(progress);
                 }
             }
         });
         const res = response.data;
 
         if (res.success) {
-            setUploadProgress(100); // API 호출 성공 시 progress 퍼센트를 100으로 설정
+            setProgress(100); // API 호출 성공 시 progress 퍼센트를 100으로 설정
             return true;
         }
         return false;
@@ -443,17 +443,38 @@ export async function addItemAPI(inputs, subImages, navigate) {
             return false;
         }
         else {
-            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            // alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            // return false;
+            console.error("Error Details:", error); // 에러 객체 전체 출력
+            console.log("Error Message:", error.message); // 에러 메시지 확인
+
+            if (error.message === "Network Error") {
+                alert("CORS 문제이거나 서버가 꺼져있습니다. (Network Error)");
+            } else {
+                alert(`서버 연결 실패: ${error.message}`);
+            }
             return false;
         }
     }
 }
 
-export async function getProductOnSalePreviewAPI(requestHeader) {
+export async function getProductOnSalePreviewAPI(requestHeader, isSearching, keyword = null) {
+    let API_PATH;
+    if (!isSearching) API_PATH = '/sale/shopping';
+    else if (isSearching) API_PATH = '/sale/search';
     try {
-        const response = await axios.get(`${BASE_URL}/sale/shopping`, {
-            headers: requestHeader,
-        });
+        let response;
+        if (!isSearching) {
+            response = await axios.get(`${BASE_URL}${API_PATH}`, {
+                headers: requestHeader,
+            });
+        }
+        else if (isSearching) {
+            response = await axios.get(`${BASE_URL}${API_PATH}`, {
+                headers: requestHeader,
+                params: { keyword: keyword },
+            });
+        }
         const res = response.data;
         if (res.success) return res.data;
         return false;
@@ -696,6 +717,68 @@ export async function deleteDesignsAPI(type, requestHeader, params) {
                     break;
                 case '0018_UNKNOWN_FAILED_DELETE_FILE':
                     alert('알 수 없는 FILE 삭제 오류 발생');
+                    break;
+                default:
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+            }
+            return false;
+        }
+        else {
+            alert('서버와 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.');
+            return false;
+        }
+    }
+}
+
+export async function purchaseDesignAPI(requestHeader, requestBody, setProgress) {
+    try {
+        console.log(requestBody);
+        const response = await axios.post(`${BASE_URL}/purchase/save`, requestBody, {
+            headers: requestHeader,
+            onUploadProgress: (progressEvent) => {
+                if (progressEvent.total) {
+                    const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    setProgress(progress);
+                }
+            }
+        });
+        const res = response.data;
+        if (res.success) return true;
+        return false;
+    }
+    catch (error) {
+        if (error.response && error.response.data) {
+            const errRes = error.response.data;
+            const errorCode = errRes.code;
+
+            switch (errorCode) {
+                case '400':
+                    alert(JSON.stringify(errRes, null, 2));
+                    break;
+                case '100_UNKNOWN_AUTH_ERROR':
+                    alert('알 수 없는 사용자 인증 오류');
+                    break;
+                case '101_NOT_BEARER_TOKEN':
+                    alert('Bearer 토큰이 없습니다.');
+                    break;
+                case '102_INVALID_ACCESS':
+                    alert('JWT 토큰 오류 발생');
+                    break;
+                case '103_EXPIRED_ACCESS':
+                    alert('액세스토큰이 만료되었습니다. 재발급 필요');
+                    break;
+                case '105_NOT_FOUND_USER':
+                    alert('존재하지 않는 사용자에 대한 토큰');
+                    break;
+                case '402_NOT_FOUND_SALE':
+                    alert('존재하지 않는 판매 도안 게시글에 대한 접근');
+                    break;
+                case '904_OWN_SALE_POST':
+                    alert('본인이 등록한 도안은 구매할 수 없습니다.');
+                    break;
+                case '905_ALREADY_PURCHASE_POST':
+                    alert('이미 구매한 도안은 재구매할 필요가 없습니다.');
                     break;
                 default:
                     alert(JSON.stringify(errRes, null, 2));

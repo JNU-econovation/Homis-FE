@@ -2,3 +2,8 @@
     background: none;
     border: none;
 }
+
+.close-btn-img {
+    width: 33px;
+    height: 33px;
+}

@@ -1,42 +1,61 @@
-.purchased-detail-page-header {
+.shopping-detail-page-header {
     margin-top: 10vh;
     margin-left: -2vw;
 }
 
-.purchased-detail-page-body {
+.shopping-detail-page-body {
     margin-top: 10vh;
     display: flex;
+    flex-direction: row;
     align-items: stretch;
     justify-content: center;
-    flex-direction: row;
+
     gap: 30px;
 }
 
-.purchased-detail-page-left-elements-wrapper {
+.shopping-detail-page-left-elements-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
-.purchased-detail-page-title-and-editor-wrapper {
+.shopping-detail-page-span-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
-.purchased-product-info {
+.shopping-detail-page-price-editor-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    
+    margin-top: 11px;
+}
+
+.listed-product-info {
     font-family: 'Pretendard';
 }
 
-.purchased-product-info.title {
+.listed-product-info.title {
     font-weight: 500;
-    font-size: 28px;
+    font-size: 24px;
     line-height: 1em;
     letter-spacing: -0.01em;
     vertical-align: bottom;
+    color: #121212;
 }
 
-.purchased-product-info.editor {
+.listed-product-info.price {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.listed-product-info.editor {
     font-weight: 600;
     font-size: 16px;
     line-height: 1em;
@@ -50,21 +69,21 @@
     color: #949494;
 }
 
-.purchased-product-img {
+.listed-product-img {
     width: 376px;
     height: 471px;
     border-radius: 10px;
     object-fit: cover;
 }
 
-.purchased-detail-page-right-elements-wrapper {
+.shopping-detail-page-right-elements-wrapper {
     display: flex;
     flex-direction: column;
 
     gap: 21px;
 }
 
-.purchased-detail-page-description {
+.shopping-detail-page-description {
     width: 100%;
     height: 240px;
 
@@ -79,24 +98,26 @@
     font-size: 15px;
     line-height: 1.4em;
     color: #000000;
+    position: relative;
 }
 
-.purchased-detail-page-download-btn-container {
-    display: flex;
-    justify-content: right;
-    margin-top: 2vh;
-}
-
-.purchased-product-img-container {
+.shopping-detail-page-img-container {
     display: flex;
     flex-direction: column;
 
-    position: relative; /* img container를 기준점으로 */
+    position: relative;
+    /* img container를 기준점으로 */
 }
 
-.image-pagination-container-in-detail-page {
+.image-pagination-container-in-shopping-detail-page {
     position: absolute;
 
     bottom: 15px;
     right: 12px;
+}
+
+.shopping-detail-page-purchase-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
 }

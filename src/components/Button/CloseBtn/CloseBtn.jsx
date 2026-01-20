@@ -14,7 +14,7 @@ export default function CloseBtn({ link, onClick }) {
 
     return (
         <button className='close-btn' onClick={handleClickCloseBtn}>
-            <img src={close_icon} alt='닫기' />
+            <img className='close-btn-img' src={close_icon} alt='닫기' />
         </button>
     );
 }

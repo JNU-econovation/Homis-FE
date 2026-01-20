@@ -6,6 +6,7 @@ import download_icon from '../../../assets/icons/DownloadIcons/download.png';
 import download_icon_white from '../../../assets/icons/DownloadIcons/download_white.png';
 
 export default function SingleDownloadBtn({ salePostId, saleName, id }) {
+    console.log('salePostId: ', salePostId, 'saleName: ', saleName, '(purchasedPostId)id: ', id);
     async function handleClickDownload(fileType) {
         if (!checkParams(salePostId, saleName)) return;
 

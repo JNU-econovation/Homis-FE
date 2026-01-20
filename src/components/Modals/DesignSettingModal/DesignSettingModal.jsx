@@ -68,7 +68,7 @@ export default function DesignSettingModal({ onClick }) {
                             <input
                                 type='text'
                                 className='modal-input for-size'
-                                placeholder='123'
+                                placeholder='10~100'
                                 value={size.pixelSize}
                                 onChange={(e) => setSize({ ...size, pixelSize: e.target.value })}
                             />

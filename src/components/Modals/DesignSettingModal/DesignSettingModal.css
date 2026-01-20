@@ -82,10 +82,7 @@
     border-radius: 64px;
     height: 28px;
 
-    padding-top: 2px;
-    padding-right: 23px;
-    padding-bottom: 2px;
-    padding-left: 23px;
+    padding: 2px 23px;
 }
 
 .for-title {
@@ -93,7 +90,7 @@
 }
 
 .for-size {
-    width: 35px;
+    width: 55px;
 }
 
 .input-size-con {

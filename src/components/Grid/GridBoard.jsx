@@ -12,9 +12,13 @@ export default function GridBoard({ width, height, gridData, onCellClick, /* usi
     // const [future, setFuture] = useState([]);
 
     // 입력된 픽셀 크기로 쪼개기 위한 repeat()를 사용 시에 col, row Cnt 사용되니 남겨둠
-    const colCnt = Math.floor(BOARD_SIZE / parseInt(width || 20)); // || 20 => 입력값 0으로 주면 그냥 20 정도로 나눔(default)
-    const rowCnt = Math.floor(BOARD_SIZE / parseInt(height || 20));
     //const totalPixels = colCnt * rowCnt;
+    //const colCnt = Math.floor(BOARD_SIZE / parseInt(width || 10)); // || 10 => 입력값 없거나 0이면 10(default)으로
+    //const rowCnt = Math.floor(BOARD_SIZE / parseInt(height || 10));
+    // 기존: 고정된 크기의 정사각형을 사용자가 입력한 값을 가로, 세로 값으로서 하나의 픽셀 크기를 정의. 해당 픽셀로 고정된 크기의 정사각형을 균등 분할하여 도안 구성
+    // 변경: 사용자가 입력한 값만큼 가로, 세로 픽셀이 존재할 것. ex: 10 입력 -> 가로10개, 세로10개, 총 10*10개의 픽셀이 존재
+    const colCnt = parseInt(width || 10); // default: 10개
+    const rowCnt = parseInt(height || 10); 
 
     /* Array.from() 예시
     const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i));
