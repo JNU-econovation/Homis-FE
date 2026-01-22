@@ -22,6 +22,7 @@ export default function DesignPage() {
     const captureTarget = useRef(null); // 캡처할 영역을 지정하기 위한 ref
 
     const { title, width, height } = locate.state || {};
+    const [editTitle, setEditTitle] = useState(title);
 
     // 도안 제작 State
     const [usingTool, setUsingTool] = useState('');
@@ -138,7 +139,7 @@ export default function DesignPage() {
                 state: {
                     designImg: captureRes,
                     designImgForAPI: base64,
-                    title: title,
+                    title: editTitle,
                     gridData: gridData,
                     // SaveDetail..에서 돌아왔을 때 cell 칸 수 그대로 유지하려면 width, height도 그대로 가져와야 하니, 이들도 전달해 줘야...
                     // 그래야만 colCnt, rowCnt가 옳게 계산됨
@@ -162,7 +163,10 @@ export default function DesignPage() {
                     <CloseBtn link='/main' />
                 </div>
                 <div className='design-page-name-con'>
-                    <span className='design-title'>{title}</span>
+                    <input className='design-title' 
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                    />
                 </div>
                 <div className='undo-redo-btn-container-in-design-page'>
                     <UndoRedoBtn

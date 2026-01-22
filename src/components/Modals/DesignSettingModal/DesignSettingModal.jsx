@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CloseBtn from '../../Button/CloseBtn/CloseBtn.jsx';
 import arrow_right_white from '../../../assets/icons/arrow/arrow_right_white.png';
+import X_icon from '../../../assets/icons/XIcons/X.png';
 
 function getKSTDate() {
     const now = new Date();
@@ -68,7 +69,17 @@ export default function DesignSettingModal({ onClick }) {
                             <input
                                 type='text'
                                 className='modal-input for-size'
-                                placeholder='10~100'
+                                placeholder='10'
+                                value={size.pixelSize}
+                                onChange={(e) => setSize({ ...size, pixelSize: e.target.value })}
+                            />
+                            <img className='x-icon-between-pixel-size'
+                                src={X_icon}
+                            />
+                            <input
+                                type='text'
+                                className='modal-input for-size'
+                                placeholder='10'
                                 value={size.pixelSize}
                                 onChange={(e) => setSize({ ...size, pixelSize: e.target.value })}
                             />

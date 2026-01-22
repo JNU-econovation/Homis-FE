@@ -29,6 +29,7 @@
 
     border-radius: 43px;
     border: 2px solid #595959;
+    color: #595959;
 }
 
 .menubar-con {
@@ -85,4 +86,24 @@
 
     margin: 56.45px 25.11px;
     box-shadow: 0px 0px 35.9px 0px #0000003B;
+}
+
+.confirm-modal-con { /* mypage에서 이미 작성했지만, 명시적으로 다시 작성
+    /* 모달은 화면 중앙에 오도록 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* 모달이 제일 위쪽으로 오도록! */
+}
+
+.design-setting-modal-con {
+    /* 모달은 화면 중앙에 오도록 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* 모달이 제일 위쪽으로 오도록! */
 }

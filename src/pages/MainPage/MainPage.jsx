@@ -3,16 +3,19 @@ import MenuBar from '../../components/Bar/MenuBar/MenuBar.jsx';
 import FilterBar from '../../components/Bar/FilterBar/FilterBar.jsx';
 import DesignSettingModal from '../../components/Modals/DesignSettingModal/DesignSettingModal.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getAccessToken, handleAuthError, getDesignsForMainPageAPI, getDesignDetailsAPI } from '../../utils/API.jsx';
+import { getAccessToken, handleAuthError, getDesignsForMainPageAPI, getDesignDetailsAPI, deleteDesignsAPI } from '../../utils/API.jsx';
 import './MainPage.css';
 import DesignPreview from '../../components/DesignPreview/DesignPreview.jsx';
+import DeleteConfirmModal from '../../components/Modals/DeleteConfirmModal/DeleteConfirmModal.jsx';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainPage() {
     const [currentTab, setCurrentTab] = useState('all');
     const [currentData, setCurrentData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [deleteTarget, setDeleteTarget] = useState({ type: null, id: null, }); // X 버튼 눌렀을 때 뭘 지울지 저장하기 위한 state. 뭐 지울지에 대한 data는 자식에게 있으니 자식에게 set 넘겨줘야..
     const navigate = useNavigate();
     const locate = useLocation();
 
@@ -141,6 +144,50 @@ export default function MainPage() {
         }
     }
 
+    /* 도안 삭제에 대한 핸들러들 */
+    function handleRequestDelete(type, id) {
+        setDeleteTarget({ type: type, id: id, });
+        setIsConfirmModalOpen(true);
+    }
+
+    async function callDeleteAPI(requestHeader, params) {
+        const apiRes = await deleteDesignsAPI(deleteTarget.type, requestHeader, params);
+        if (apiRes) {
+            // alert('삭제되었습니다.');
+            // executeReRender(); // 삭제한 이후에 부모page(main-page) re-rendering
+            setIsConfirmModalOpen(false);
+            fetchData();
+        }
+    }
+
+    async function handleClickRealDelete() {
+        let accessToken;
+        try { accessToken = getAccessToken(); }
+        catch (error) { handleAuthError(error, navigate); return; }
+        const requestHeader = {
+            'Authorization': `Bearer ${accessToken}`,
+        };
+        let params;
+        if (deleteTarget.type === 'MADE') params = { madeDataId: deleteTarget.id || deleteTarget.madeDataId, }; // currentTab이 all일 경우, id가 madeDataId
+        else if (deleteTarget.type === 'PURCHASE') params = { purchasedPostId: deleteTarget.id || deleteTarget.purchasedPostId, }; // 얜 id가 purchasedPostId
+        await callDeleteAPI(requestHeader, params);
+    }
+    <AnimatePresence>
+        {isConfirmModalOpen &&
+            <motion.div className='confirm-modal-con'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: 'easeIn', duration: 0.3 }}
+            >
+                <DeleteConfirmModal
+                    onClick={(e) => handleClickRealDelete(e)}
+                    onCloseClick={() => setIsConfirmModalOpen(false)}
+                />
+            </motion.div>
+        }
+    </AnimatePresence>
+
     return (
         <div className='mypage-con'>
             <div className='main-page-header'>
@@ -152,8 +199,18 @@ export default function MainPage() {
                 </div>
                 <div className='edit-con'>
                     <button className='edit-btn' onClick={() => setIsModalOpen(true)}>+Edit</button>
-                    {isModalOpen &&
-                        <DesignSettingModal onClick={() => setIsModalOpen(false)} />}
+                    <AnimatePresence>
+                        {isModalOpen &&
+                            <motion.div className='design-setting-modal-con'
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ ease: 'easeIn', duration: 0.3 }}
+                            >
+                                <DesignSettingModal onClick={() => setIsModalOpen(false)} />
+                            </motion.div>
+                        }
+                    </AnimatePresence>
                 </div>
             </div>
             <div className='designs-con'>
@@ -171,7 +228,8 @@ export default function MainPage() {
                                         type='MADE'
                                         designData={item}
                                         onDesignClick={() => handleDesignClick('MADE', item.madeDataId,)}
-                                        executeReRender={fetchData}
+                                        // executeReRender={fetchData} // 필요없음 이제. 부모에서 삭제 후 결과 반영 위해 re-rendering 하면 되니까
+                                        onDeleteRequest={() => handleRequestDelete('MADE', item.madeDataId,)} // X 버튼 클릭했을 때, 해당 컴포넌트의 TYPE과 madeDataId를 state에 저장
                                     />
                                 </div>
                             )
@@ -193,7 +251,11 @@ export default function MainPage() {
                                             if (item.type === 'MADE') handleDesignClick(item.type, item.id); // MADE 타입이면 id 넘겨주면 됨
                                             else if (item.type === 'PURCHASE') handleDesignClick(item.type, item.original_post_id, item.id);
                                         }}
-                                        executeReRender={fetchData}
+                                        // executeReRender={fetchData}
+                                        onDeleteRequest={() => {
+                                            if (item.type === 'MADE') handleRequestDelete('MADE', item.id);
+                                            else if (item.type === 'PURCHASE') handleRequestDelete('PURCHASE', item.id); // id가 purchasedPostId. 이게 삭제에 필요한 data
+                                        }}
                                     />
                                 </div>
                             )
@@ -215,7 +277,8 @@ export default function MainPage() {
                                         type='PURCHASE'
                                         designData={item}
                                         onDesignClick={() => handleDesignClick('PURCHASE', item.salePostId, item.purchasedPostId)}
-                                        executeReRender={fetchData}
+                                        // executeReRender={fetchData}
+                                        onDeleteRequest={() => handleRequestDelete('PURCHASE', item.purchasedPostId)} // 삭제에 필요한 건 purchasedPostId
                                     />
                                 </div>
                             )
@@ -233,6 +296,21 @@ export default function MainPage() {
             <div className='menubar-con'>
                 <MenuBar />
             </div>
+            <AnimatePresence>
+                {isConfirmModalOpen &&
+                    <motion.div className='confirm-modal-con'
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ ease: 'easeIn', duration: 0.3 }}
+                    >
+                        <DeleteConfirmModal
+                            onClick={handleClickRealDelete}
+                            onCloseClick={() => setIsConfirmModalOpen(false)}
+                        />
+                    </motion.div>
+                }
+            </AnimatePresence>
         </div>
     );
 }

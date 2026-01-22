@@ -1,0 +1,78 @@
+.delete-confirm-modal-overlay {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212B2;
+
+}
+
+.delete-confirm-modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 487px;
+    height: 327px;
+    border-radius: 30px;
+    background-color: #fefefe;
+    box-shadow: 0px 0px 7.1px 0px #00000091;
+
+    position: relative;
+}
+
+.delete-confirm-modal-header {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: flex-end;
+
+    top: 22px;
+    right: 25px;
+    gap: 18px;
+}
+
+.line-in-confirm-modal {
+    width: 438px;
+    height: 0px;
+    border: 2px solid #f2f2f2;
+    transform: rotate(0.13deg); /* angle: 0.13 deg; */
+
+}
+
+
+.delete-confirm-external-span {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    vertical-align: center;
+    color: #000000;
+}
+
+.delete-confirm-internal-span {
+    font-weight: 600;
+}
+
+.delete-confirm-modal-footer {
+    position: absolute;
+    bottom: 19px;
+}
+
+.agree-to-delete-btn {
+    width: 438px;
+    height: 42px;
+    border-radius: 64px;
+    background-color: #121212;
+    
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    letter-spacing: -0.02em;
+    vertical-align: center;
+    color: #fefefe;
+}

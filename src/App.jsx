@@ -28,6 +28,7 @@ import UserProfile from './components/UserProfile/UserProfile.jsx';
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage.jsx';
 import ShoppingPage from './pages/ShoppingPage/ShoppingPage.jsx';
 import ShoppingDetailPage from './pages/ShoppingDetailPage/ShoppingDetailPage.jsx';
+import DeleteConfirmModal from './components/Modals/DeleteConfirmModal/DeleteConfirmModal.jsx';
 
 export default function App() {
   return (
@@ -74,6 +75,7 @@ export default function App() {
         {/* <WheelBtn /> */}
         {/* <UserSettingModal /> */}
         {/* <UserProfile /> */}
+        {/* <DeleteConfirmModal /> */}
     </BrowserRouter>
   );
 }

@@ -37,6 +37,9 @@
     text-align: center;
 
     color: #000000;
+
+    border: none;
+    background-color: #f2f2f2;
 }
 
 .tool-con {
@@ -61,4 +64,3 @@
 
     height: fit-content; /* html2canvas로 캡처 시 별다른 설정 없다면 부모 사이즈만큼 캡처됨. 여백 줄이기 위해 직접 높이를 지정 */
 }
-

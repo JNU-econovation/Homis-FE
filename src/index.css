@@ -1,0 +1,10 @@
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+input, textarea {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}

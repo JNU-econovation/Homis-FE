@@ -96,11 +96,15 @@
     width: 80%;
     height: 45px;
 
-    font-family: 'Inter';
+    font-family: Inter;
     font-weight: 500;
     font-size: 16px;
     line-height: 1em;
     letter-spacing: -0.02em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .register-btn-right-arrow {

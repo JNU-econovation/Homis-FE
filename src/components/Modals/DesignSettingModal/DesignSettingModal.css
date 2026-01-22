@@ -11,7 +11,8 @@
     align-items: center;
 
     background-color: #121212B2;
-    z-index: 100; /* 제일 위로!! */
+    z-index: 100;
+    /* 제일 위로!! */
 }
 
 .design-modal-container {
@@ -26,7 +27,8 @@
     padding-left: 24px;
     padding-right: 24px;
 
-    box-sizing: border-box; /* 패딩 줘도 전체 박스 사이즈(487px)보다 안 커지게 */
+    box-sizing: border-box;
+    /* 패딩 줘도 전체 박스 사이즈(487px)보다 안 커지게 */
 }
 
 .modal-header {
@@ -54,7 +56,7 @@
 
 .input-name-con {
     margin-top: 40px;
-    
+
     display: flex;
     align-items: center;
 }
@@ -82,15 +84,18 @@
     border-radius: 64px;
     height: 28px;
 
-    padding: 2px 23px;
+
+    box-sizing: border-box;
 }
 
 .for-title {
-    width: 170px;
+    padding: 4.5px 23px;
+    width: 210px;
 }
 
 .for-size {
-    width: 55px;
+    width: 76px;
+    padding: 2px 29px;
 }
 
 .input-size-con {
@@ -153,4 +158,11 @@
 .arrow-btn {
     width: 17px;
     height: 17px;
+}
+
+.x-icon-between-pixel-size {
+    width: 17px;
+    height: 17px;
+    margin-left: 8px;
+    margin-right: 8px;
 }

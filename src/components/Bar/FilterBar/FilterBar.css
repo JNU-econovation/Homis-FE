@@ -34,6 +34,8 @@
     color: #A4A4A4;
     white-space: nowrap;
 
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .filter-btn.active {

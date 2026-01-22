@@ -16,6 +16,8 @@
     text-underline-offset: 13%;
     text-decoration-thickness: 8.5%;
     text-decoration-skip-ink: auto;
+
+    color: #000000;
 }
 
 /* .save-btn img {

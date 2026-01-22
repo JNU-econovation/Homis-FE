@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getAccessToken, handleAuthError, purchaseDesignAPI } from '../../../utils/API.jsx';
 import LoadingModal from '../../Modals/LoadingModal/LoadingModal.jsx';
+import X_white_icon from '../../../assets/icons/XIcons/X_white.png';
 
 // isEnabled True: btn activated |  False: btn inactivated
 export default function PurchaseBtn({ isEnabled, salePostId, executeParentReRender }) {
@@ -33,10 +34,27 @@ export default function PurchaseBtn({ isEnabled, salePostId, executeParentReRend
     }
     return (
         <div className='purchase-btn-container'>
-            <button className={isEnabled ? 'purchase-btn activated' : 'purchase-btn inactivated'}
+            {isEnabled ?
+                <button className='purchase-btn activated'
+                    disabled={!isEnabled}
+                    onClick={handleClick}
+                >
+                    구매하기
+                </button>
+                :
+                <button className='purchase-btn inactivated'
+                    disabled={!isEnabled}
+                    onClick={handleClick}
+                >
+                    <img className='inactivated-purchase-btn-img'
+                        src={X_white_icon} img='purchase unavailable img'
+                    />
+                </button>
+            }
+            {/* <button className={isEnabled ? 'purchase-btn activated' : 'purchase-btn inactivated'}
                 disabled={!isEnabled}
                 onClick={handleClick}
-            >구매하기</button>
+            >구매하기</button> */}
 
             {isModalOpen &&
                 <LoadingModal

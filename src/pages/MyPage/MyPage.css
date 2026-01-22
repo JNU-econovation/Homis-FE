@@ -97,3 +97,13 @@
     opacity: 1;
     visibility: hidden;
 }
+
+.confirm-modal-con {
+    /* 모달은 화면 중앙에 오도록 */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* 모달이 제일 위쪽으로 오도록! */
+}

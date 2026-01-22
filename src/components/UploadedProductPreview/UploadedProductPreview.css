@@ -19,8 +19,8 @@
 }
 
 .three-dots-img {
-    width: 26px;
-    height: 26px;
+    width: 38px;
+    height: 38px;
 }
 
 .three-dots-btn {
@@ -38,8 +38,8 @@
     height: 25px;
     background: #000000B2;
     position: absolute;
-    right: 15px;
-    top: 30px;
+    right: 22px;
+    top: 35px;
 
     display: flex;
     justify-content: center;
