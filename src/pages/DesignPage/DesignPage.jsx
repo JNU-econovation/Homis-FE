@@ -25,7 +25,7 @@ export default function DesignPage() {
     const [editTitle, setEditTitle] = useState(title);
 
     // 도안 제작 State
-    const [usingTool, setUsingTool] = useState('');
+    const [usingTool, setUsingTool] = useState('brush');
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSymbol, setSelectedSymbol] = useState('');
     const [activeTab, setActiveTab] = useState(COLOR_PALETTES[0].id); // COLOR_PALETTES[i].id => 'color0i'
