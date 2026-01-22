@@ -18,7 +18,7 @@
     background-color: #f2f2f2;
     border-radius: 43px;
     border: none;
-    padding-left: 20px;
+    padding-left: 120px;
     box-sizing: border-box;
 }
 
@@ -39,6 +39,20 @@
 .search-img {
     width: 18px;
     height: 18px;
+}
+
+.search-logo-con {
+    position: absolute;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.search-logo-span {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -0.01em;
 }
 
 .shopping-page-body {

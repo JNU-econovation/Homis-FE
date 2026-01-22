@@ -1,6 +1,7 @@
 import './ShoppingPage.css';
 
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import search_icon from '../../assets/icons/shopping/search_icon.png';
 // import sample_icon_1 from '../../assets/sample/sample_1.png';
@@ -88,10 +89,21 @@ export default function ShoppingPage() {
         <div className='shopping-page-container'>
             <div className='shopping-page-header'>
                 <div className='search-bar-contaier'>
+                    <div className='search-logo-con'>
+                        <span className='search-logo-span'
+                            onClick={() => {
+                                isSearching.current = false;
+                                setKeyword('');
+                                setSearchedKeyword('');
+                                setIsLoading(true);
+                                fetchData();
+                            }} // 현재 페이지로는 navigate 불가능. state를 초기값으로 다 reset하면 된다!
+                        >Knit Doa</span>
+                    </div>
                     <input className='shopping-page-search'
                         type='search'
                         enterKeyHint='search' // 키보드: enter -> 검색 | 모바일: 키보드ui 우측 하단 돋보기로 변경
-                        placeholder='Doa'
+                        placeholder='검색어를 입력해주세요.'
                         value={keyword}
                         onChange={(e) => setKeyword(e.target.value)}
                         onKeyDown={handleKeyDown} // 키보드(+모바일) 클릭에 대한 이벤트 핸들러

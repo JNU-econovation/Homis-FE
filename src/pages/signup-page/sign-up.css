@@ -46,32 +46,32 @@
 }
 
 .signup-submit-btn-container {
-    margin-top: 34.5vh;
+    margin-top: 26.5vh;
     display: flex;
     justify-content: center;
 }
 
 @media (max-height: 1180px) {
     .signup-submit-btn-container {
-        margin-top: 31.5vh;
+        margin-top: 23.5vh;
     }
 }
 
 @media (max-height: 1024px) {
     .signup-submit-btn-container {
-        margin-top: 27.5vh;
+        margin-top: 19.5vh;
     }
 }
 
 @media (max-height: 820px) {
     .signup-submit-btn-container {
-        margin-top: 20vh;
+        margin-top: 12vh;
     }
 }
 
 @media (max-height: 768px) {
     .signup-submit-btn-container {
-        margin-top: 17.5vh;
+        margin-top: 9.5vh;
     }
 }
 

@@ -131,7 +131,7 @@ export default function DesignPage() {
         try {
             const img = await html2canvas(captureTarget.current); // 화면 캡처
 
-            const captureRes = img.toDataURL('design-img');
+            const captureRes = img.toDataURL('image/png');
             const base64 = captureRes.split(',')[1]; // 불필요한 header(data:image/png;base64,) 제거. 안 없애면 500 Internal Server Error
             console.log(`base64: ${base64}`);
 
