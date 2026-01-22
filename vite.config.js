@@ -13,6 +13,11 @@ export default defineConfig({
         short_name: 'Knit Doa', // 홈 화면에 표시되는 이름
         description: '뜨개질 도안 제작 및 판매 플랫폼',
         theme_color: '#ffffff', // 앱 테마 색상
+
+        /* splash screen */
+        background_color: '#121212',
+        display: 'standalone', // 주소창 X
+
         icons: [ // ~(root): public
           {
             src: '/icons/pwa_icons/logo192.png',
