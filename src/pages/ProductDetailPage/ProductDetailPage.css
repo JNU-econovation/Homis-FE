@@ -68,3 +68,17 @@
     line-height: 1.4em;
     color: #000000;
 }
+
+.product-detail-img-container {
+    display: flex;
+    flex-direction: column;
+
+    position: relative; /* img container를 기준점으로 */
+}
+
+.image-pagination-container-in-uploaded-product-detail-page {
+    position: absolute;
+
+    bottom: 15px;
+    right: 12px;
+}
