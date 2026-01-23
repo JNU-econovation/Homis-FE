@@ -98,6 +98,10 @@
     padding: 2px 29px;
 }
 
+.modal-input.for-size:focus::placeholder {
+    color: transparent;
+}
+
 .input-size-con {
     margin-top: 30px;
 
