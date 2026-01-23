@@ -30,10 +30,10 @@ export default function SaveDetailPage() {
     }
 
     async function handleSaveClick() {
-        if (!description) {
-            alert('상세 설명을 작성해 주세요.');
-            return;
-        }
+        // if (!description) {
+        //     alert('상세 설명을 작성해 주세요.');
+        //     return;
+        // }
 
         let accessToken;
         try { accessToken = getAccessToken(); }
